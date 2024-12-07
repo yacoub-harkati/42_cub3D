@@ -6,12 +6,12 @@
 #    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 13:45:21 by root              #+#    #+#              #
-#    Updated: 2024/12/07 00:27:43 by root             ###   ########.fr        #
+#    Updated: 2024/12/07 02:07:28 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = src/main.c src/utils/check_args.c src/utils/error.c src/utils/utils.c \
-		src/init_struct.c src/parse_map.c 
+		src/init_struct.c src/parse_data.c src/check_data.c
 
 HEAD = -I includes -I Libft
 
