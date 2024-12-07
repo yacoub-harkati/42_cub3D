@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2024/12/07 22:22:55 by root             ###   ########.fr       */
+/*   Updated: 2024/12/07 22:33:32 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int	check_file(char **file)
 		!check_identifier(file, "WE") || !check_identifier(file, "EA") ||
 		!check_identifier(file, "F") || !check_identifier(file, "C"))
 		return (1);
+	
 	return (0);
 }
