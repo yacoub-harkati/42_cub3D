@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2024/12/07 23:36:27 by root             ###   ########.fr       */
+/*   Updated: 2024/12/08 00:15:48 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,55 @@ int	check_order(char **file)
 	return (0);
 }
 
-int	check_file(char **file)
+char	*get_path(char **file, char *str)
 {
-	if (!check_identifier(file, "NO") || !check_identifier(file, "SO") ||
-		!check_identifier(file, "WE") || !check_identifier(file, "EA") ||
-		!check_identifier(file, "F") || !check_identifier(file, "C"))
+	int		i;
+	char	*s;
+	char	**split;
+
+	i = 0;
+	while (file[i])
+	{
+		s = ft_strnstr(file[i], str, ft_strlen(file[i]));
+		if (s)
+			break ;
+		i++;
+	}
+	if (s)
+		s = ft_strtrim(s, "\n");
+	split = ft_split(s, ' ');
+	return (split[1]);
+}
+
+int	check_path(t_mlx *mlx, t_path **path)
+{
+	*path = malloc(sizeof(t_path));
+	if (!*path)
 		return (1);
-	if (check_order(file))
+	(*path)->NO = get_path(mlx->file, "NO");
+	if (!(*path)->NO)
+		return (err("Error\nNO path is missing\n"), 1);
+	(*path)->SO = get_path(mlx->file, "SO");
+	if (!(*path)->SO)
+		return (err("Error\nSO path is missing\n"), 1);
+	(*path)->WE = get_path(mlx->file, "WE");
+	if (!(*path)->WE)
+		return (err("Error\nWE path is missing\n"), 1);
+	(*path)->EA = get_path(mlx->file, "EA");
+	if (!(*path)->EA)
+		return (err("Error\nEA path is missing\n"), 1);
+	return (0);
+}
+
+int	check_file(t_mlx *mlx)
+{
+	if (!check_identifier(mlx->file, "NO") || !check_identifier(mlx->file, "SO") ||
+		!check_identifier(mlx->file, "WE") || !check_identifier(mlx->file, "EA") ||
+		!check_identifier(mlx->file, "F") || !check_identifier(mlx->file, "C"))
+		return (1);
+	if (check_order(mlx->file))
+		return (1);
+	if (check_path(mlx, &mlx->path))
 		return (1);
 	return (0);
 }

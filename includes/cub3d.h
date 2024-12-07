@@ -31,6 +31,6 @@ t_mlx	*init_struct(int ac, char **av);
 char	**parse_file(char **av);
 int		count_lines(char *av);
 void	get_file(char *file, char **map);
-int		check_file(char **file);
+int		check_file(t_mlx *mlx);
 
 #endif
