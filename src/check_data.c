@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2024/12/08 00:15:48 by root             ###   ########.fr       */
+/*   Updated: 2024/12/08 00:49:43 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,50 @@ char	*get_path(char **file, char *str)
 	return (split[1]);
 }
 
+int	is_xpm_png_file(char *file)
+{
+	int	len;
+
+	len = ft_strlen(file);
+	if ((file[len - 4] == '.' && file[len - 3] == 'x' &&
+		file[len - 2] == 'p' && file[len - 1] == 'm') ||
+		(file[len - 4] == '.' && file[len - 3] == 'p' &&
+		file[len - 2] == 'n' && file[len - 1] == 'g'))
+		return (1);
+	return (0);
+}
+
+int	check_path_file(t_path *path)
+{
+	int		fd;
+
+	fd = open(path->NO, O_RDONLY);
+	if (fd < 0)
+		return (err("Error\nNO texture file doesnt exist\n"), 1);
+	close (fd);
+	fd = open(path->SO, O_RDONLY);
+	if (fd < 0)
+		return (err("Error\nSO texture file doesnt exist\n"), 1);
+	close (fd);
+	fd = open(path->WE, O_RDONLY);
+	if (fd < 0)
+		return (err("Error\nWE texture file doesnt exist\n"), 1);
+	close (fd);
+	fd = open(path->EA, O_RDONLY);
+	if (fd < 0)
+		return (err("Error\nEA texture file doesnt exist\n"), 1);
+	close (fd);
+	if (!is_xpm_png_file(path->NO))
+		return (err("Error\nNO texture file have to be a .xpm or .png file\n"), 1);
+	if (!is_xpm_png_file(path->SO))
+		return (err("Error\nSO texture file have to be a .xpm or .png file\n"), 1);
+	if (!is_xpm_png_file(path->WE))
+		return (err("Error\nWE texture file have to be a .xpm or .png file\n"), 1);
+	if (!is_xpm_png_file(path->EA))
+		return (err("Error\nEA texture file have to be a .xpm or .png file\n"), 1);
+	return (0);
+}
+
 int	check_path(t_mlx *mlx, t_path **path)
 {
 	*path = malloc(sizeof(t_path));
@@ -110,6 +154,8 @@ int	check_path(t_mlx *mlx, t_path **path)
 	(*path)->EA = get_path(mlx->file, "EA");
 	if (!(*path)->EA)
 		return (err("Error\nEA path is missing\n"), 1);
+	if (check_path_file(*path))
+		return (1);
 	return (0);
 }
 
