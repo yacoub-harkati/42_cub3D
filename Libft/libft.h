@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 16:21:06 by rzarhoun          #+#    #+#             */
-/*   Updated: 2024/12/07 00:53:45 by root             ###   ########.fr       */
+/*   Updated: 2024/12/07 01:02:14 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*get_next_line(int fd);
 char	*f_strjoin(char *s1, char *s2);
-char	*f_strchr(char *s, int c)
+char	*f_strchr(char *s, int c);
 char	*f_strdup(char *s);
 
 #endif
