@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2024/12/08 00:49:43 by root             ###   ########.fr       */
+/*   Updated: 2024/12/08 02:13:27 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ int	check_identifier(char **file, char *str)
 	while (file[i])
 	{
 		if (ft_strnstr(file[i], str, ft_strlen(file[i])))
+		{
+			if (ft_strncmp(file[i], str, ft_strlen(str)))
+				err("Error\nIdentifier and path order is invalid\n"), exit (1);
 			count++;
+		}
 		i++;
 	}
 	if (count == 0)
@@ -137,6 +141,24 @@ int	check_path_file(t_path *path)
 	return (0);
 }
 
+int	check_rgb(t_mlx *mlx)
+{
+	int	i;
+	int	f;
+	int	c;
+
+	i = 0;
+	while (i < 3)
+	{
+		f = ft_atoi(mlx->floor[i]);
+		c = ft_atoi(mlx->ceiling[i]);
+		if ((f < 0 || f > 255) || (c < 0 || c > 255))
+			return (err("Error\nInvalid rgb color\n"), 1);
+		i++;
+	}
+	return (0);
+}
+
 int	check_path(t_mlx *mlx, t_path **path)
 {
 	*path = malloc(sizeof(t_path));
@@ -155,6 +177,14 @@ int	check_path(t_mlx *mlx, t_path **path)
 	if (!(*path)->EA)
 		return (err("Error\nEA path is missing\n"), 1);
 	if (check_path_file(*path))
+		return (1);
+	mlx->floor = ft_split(get_path(mlx->file, "F"), ',');
+	mlx->ceiling = ft_split(get_path(mlx->file, "C"), ',');
+	if (!mlx->floor)
+		return (err("Error\nFloor color is missing\n"), 1);
+	if (!mlx->ceiling)
+		return (err("Error\nCeiling color is missing\n"), 1);
+	if (check_rgb(mlx))
 		return (1);
 	return (0);
 }

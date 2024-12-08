@@ -22,6 +22,8 @@ typedef struct	s_mlx
 	char	**file;
 	char	**map;
 	t_path	*path;
+	char	**floor;
+	char	**ceiling;
 }	t_mlx;
 
 void	err(char *str);
