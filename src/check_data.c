@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2024/12/08 20:40:05 by root             ###   ########.fr       */
+/*   Updated: 2024/12/08 21:47:12 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,13 +253,6 @@ int	check_map_is_at_end(char **file)
 	return (0);
 }
 
-int	check_map(t_mlx *mlx)
-{
-	if (check_map_is_at_end(mlx->file))
-		return (err("Error\nMap is not at the end of file\n"), 1);
-	return (0);
-}
-
 int	check_file(t_mlx *mlx)
 {
 	if (!check_identifier(mlx->file, "NO") || !check_identifier(mlx->file, "SO") ||
@@ -270,7 +263,35 @@ int	check_file(t_mlx *mlx)
 		return (1);
 	if (check_path(mlx, &mlx->path))
 		return (1);
-	if (check_map(mlx))
+	if (check_map_is_at_end(mlx->file))
+		return (err("Error\nMap is not at the end of file\n"), 1);
+	return (0);
+}
+
+int	check_map_borders(t_map *map)
+{
+	int	i;
+	int	j;
+	int	len;
+
+	i = 0;
+	len = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		len = ft_strlen(map->map[i]);
+		while (map->map[i][j] == ' ' || map->map[i][j] == '\t')
+			j++;
+		if (map->map[i][j] != '1' || map->map[i][len - 1] != '1')
+			return (err("Error\nMap borders should be a wall\n"), 1);
+		i++;
+	}
+	return (0);
+}
+
+int	check_map(t_map *map)
+{
+	if (check_map_borders(map))
 		return (1);
 	return (0);
 }

@@ -16,11 +16,18 @@ typedef struct s_path
 	char	*EA;
 }	t_path;
 
+typedef struct s_map
+{
+	char	**map;
+	int		height;
+	int		width;
+}	t_map;
+
 
 typedef struct	s_mlx
 {
 	char	**file;
-	char	**map;
+	t_map	*map;
 	t_path	*path;
 	int		*floor;
 	int		*ceiling;
@@ -35,7 +42,9 @@ int		count_lines(char *av);
 void	get_file(char *file, char **map);
 int		check_file(t_mlx *mlx);
 int		is_map_line(char *line);
-char	**parse_map(char **file);
-void	get_map(char **file, char **map, int index);
+t_map	*parse_map(char **file);
+void	get_map(char **file, t_map *map, int index);
+int		check_map(t_map *map);
+size_t	get_width(char **map);
 
 #endif

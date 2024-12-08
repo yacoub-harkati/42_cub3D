@@ -6,30 +6,38 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:49:08 by root              #+#    #+#             */
-/*   Updated: 2024/12/08 21:05:49 by root             ###   ########.fr       */
+/*   Updated: 2024/12/08 22:19:59 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	**parse_map(char **file)
+t_map	*parse_map(char **file)
 {
 	int		i;
-	int		len;
-	char	**map;
+	int		map_start;
+	t_map	*map;
 
 	i = 0;
-	len = 0;
+	map = malloc(sizeof(t_map));
+	map->height = 0;
+	map->width = 0;
+	map_start = -1;
+	if (!map)
+		return (err("Error\n"), NULL);
 	while (file[i])
 	{
 		if (is_map_line(file[i]))
-			len++;
+		if (map_start == -1)
+			map_start = i;
+		map->height++;
 		i++;
 	}
-	map = malloc(sizeof(char *) * (len + 1));
-	if (!map)
+	map->map = malloc(sizeof(char *) * (map->height + 1));
+	if (!map->map)
 		return (err("Error\n"), NULL);
-	get_map(file, map, (i - len));
+	get_map(file, map, map_start);
+	map->width = get_width(map->map);
 	return (map);
 }
 
