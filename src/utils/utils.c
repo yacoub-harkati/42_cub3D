@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:15:25 by root              #+#    #+#             */
-/*   Updated: 2024/12/07 02:06:35 by root             ###   ########.fr       */
+/*   Updated: 2024/12/08 19:55:10 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void	get_file(char *str, char **file)
 	if (fd < 0)
 		return (err("Error\n"));
 	i = 0;
-	file[i] = get_next_line(fd);
+	file[i] = ft_strtrim(get_next_line(fd), "\n");
 	while (file[i])
 	{
 		i++;
-		file[i] = get_next_line(fd);
+		file[i] = ft_strtrim(get_next_line(fd), "\n");
 	}
 }

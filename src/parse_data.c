@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:49:08 by root              #+#    #+#             */
-/*   Updated: 2024/12/08 00:00:39 by root             ###   ########.fr       */
+/*   Updated: 2024/12/08 19:54:32 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,8 @@ char	**parse_file(char **av)
 	if (!file)
 		return (NULL);
 	get_file(av[1], file);
+	int i = 0;
+	while (file[i])
+		printf("%s\n", file[i++]);
 	return (file);
 }
