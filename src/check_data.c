@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2024/12/08 02:13:27 by root             ###   ########.fr       */
+/*   Updated: 2024/12/08 13:49:54 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,23 +144,37 @@ int	check_path_file(t_path *path)
 int	check_rgb(t_mlx *mlx)
 {
 	int	i;
-	int	f;
-	int	c;
 
 	i = 0;
 	while (i < 3)
 	{
-		f = ft_atoi(mlx->floor[i]);
-		c = ft_atoi(mlx->ceiling[i]);
-		if ((f < 0 || f > 255) || (c < 0 || c > 255))
+		if ((mlx->floor[i] < 0 || mlx->floor[i] > 255) || (mlx->ceiling[i] < 0 || mlx->ceiling[i] > 255))
 			return (err("Error\nInvalid rgb color\n"), 1);
 		i++;
 	}
 	return (0);
 }
 
+int	*convert_char_int(char **str)
+{
+	int	i;
+	int	*res;
+
+	i = 0;
+	res = malloc(sizeof(int) * 4);
+	while (i < 3)
+	{
+		res[i] = ft_atoi(str[i]);
+		i++;
+	}
+	return (res);
+}
+
 int	check_path(t_mlx *mlx, t_path **path)
 {
+	char	**floor;
+	char	**ceiling;
+
 	*path = malloc(sizeof(t_path));
 	if (!*path)
 		return (1);
@@ -178,14 +192,61 @@ int	check_path(t_mlx *mlx, t_path **path)
 		return (err("Error\nEA path is missing\n"), 1);
 	if (check_path_file(*path))
 		return (1);
-	mlx->floor = ft_split(get_path(mlx->file, "F"), ',');
-	mlx->ceiling = ft_split(get_path(mlx->file, "C"), ',');
-	if (!mlx->floor)
+	floor = ft_split(get_path(mlx->file, "F"), ',');
+	ceiling = ft_split(get_path(mlx->file, "C"), ',');
+	if (!floor)
 		return (err("Error\nFloor color is missing\n"), 1);
-	if (!mlx->ceiling)
+	if (!ceiling)
 		return (err("Error\nCeiling color is missing\n"), 1);
+	mlx->floor = convert_char_int(floor);
+	mlx->ceiling = convert_char_int(ceiling);
 	if (check_rgb(mlx))
 		return (1);
+	return (0);
+}
+
+int	is_map_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '0' && line[i] != '1' && 
+			line[i] != ' ' && line[i] != 'N' && 
+			line[i] != 'S' && line[i] != 'E' && 
+			line[i] != 'W')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	check_map_is_at_end(char **file)
+{
+	int	i;
+	int	map_start;
+
+	i = 0;
+	map_start = -1;
+	while (file[i])
+	{
+		if (is_map_line(file[i]))
+		{
+			map_start = i;
+			break ;
+		}
+		i++;
+	}
+	if (map_start == -1)
+		return (1);
+	return (0);
+}
+
+int	check_map(t_mlx *mlx)
+{
+	if (check_map_is_at_end(mlx->file))
+		return (err("Error\nMap is not at the end of file\n"), 1);
 	return (0);
 }
 
@@ -198,6 +259,8 @@ int	check_file(t_mlx *mlx)
 	if (check_order(mlx->file))
 		return (1);
 	if (check_path(mlx, &mlx->path))
+		return (1);
+	if (check_map(mlx))
 		return (1);
 	return (0);
 }
