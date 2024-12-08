@@ -34,5 +34,8 @@ char	**parse_file(char **av);
 int		count_lines(char *av);
 void	get_file(char *file, char **map);
 int		check_file(t_mlx *mlx);
+int		is_map_line(char *line);
+char	**parse_map(char **file);
+void	get_map(char **file, char **map, int index);
 
 #endif

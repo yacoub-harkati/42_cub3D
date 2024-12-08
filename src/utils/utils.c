@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:15:25 by root              #+#    #+#             */
-/*   Updated: 2024/12/08 19:55:10 by root             ###   ########.fr       */
+/*   Updated: 2024/12/08 21:04:25 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ int	count_lines(char *av)
 	}
 	close (fd);
 	return (count);
+}
+
+void	get_map(char **file, char **map, int index)
+{
+	int	i;
+
+	i = 0;
+	while (file[index])
+	{
+		map[i] = ft_strdup(file[index]);
+		i++;
+		index++;
+	}
 }
 
 void	get_file(char *str, char **file)
