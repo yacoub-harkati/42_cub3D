@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2024/12/08 19:36:35 by root             ###   ########.fr       */
+/*   Updated: 2024/12/08 20:40:05 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,16 +210,20 @@ int	is_map_line(char *line)
 	int	i;
 
 	i = 0;
+	if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2) ||
+		!ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2) ||
+		!ft_strncmp(line, "C", 1) || !ft_strncmp(line, "F", 1))
+		return (0);
 	while (line[i])
 	{
-		if (line[i] != '0' && line[i] != '1' && 
-			line[i] != ' ' && line[i] != 'N' && 
-			line[i] != 'S' && line[i] != 'E' && 
-			line[i] != 'W')
-			return (0);
+		if (line[i] == '0' || line[i] == '1' || 
+			line[i] == ' ' || line[i] == 'N' || 
+			line[i] == 'S' || line[i] == 'E' || 
+			line[i] == 'W')
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	check_map_is_at_end(char **file)
@@ -240,6 +244,12 @@ int	check_map_is_at_end(char **file)
 	}
 	if (map_start == -1)
 		return (1);
+	while (file[i])
+	{
+		if (!is_map_line(file[i]))
+			return (1);
+		i++;
+	}
 	return (0);
 }
 
