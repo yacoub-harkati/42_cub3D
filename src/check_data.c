@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2024/12/09 01:10:37 by root             ###   ########.fr       */
+/*   Updated: 2024/12/09 02:09:33 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,8 +279,9 @@ int	check_map_borders(char **map)
 	while (map[i])
 	{
 		j = 0;
-		map[i] = ft_strtrim(map[i], " ");
 		len = ft_strlen(map[i]);
+		while (map[i][len - 1] == ' ')
+			len--;
 		while (map[i][j] == ' ' || map[i][j] == '\t')
 			j++;
 		if (map[i][j] != '1' || map[i][len - 1] != '1')
@@ -321,10 +322,10 @@ int	check_map_walls(t_map *map)
 		{
 			if (map->map[i][j] == ' ')
 			{
-				if (i > 0 && map->map[i - 1][j] != '1' && map->map[i - 1][j] != ' ')
+				if (i > 0 && map->map[i - 1][j] != '1' && map->map[i - 1][j] != ' ' && ft_isalnum(map->map[i - 1][j]))
 					return (err("Error\nMap should be surrounded by walls\n"), 1);
-				if (i < map->height - 1 && map->map[i + 1][j] != '1' && map->map[i + 1][j] != ' ')
-					return (printf("%s\n", map->map[i]), err("Error\nMap should be surrounded by walls2\n"), 1);
+				if (i < map->height - 1 && map->map[i + 1][j] != '1' && map->map[i + 1][j] != ' ' && ft_isalnum(map->map[i + 1][j]))
+					return (err("Error\nMap should be surrounded by walls\n"), 1);
 				if ((map->map[i][j - 1] && map->map[i][j - 1] != '1' && map->map[i][j - 1] != ' ' && ft_isalnum(map->map[i][j - 1])) ||
 					(map->map[i][j + 1] && map->map[i][j + 1] != '1' && map->map[i][j + 1] != ' ' && ft_isalnum(map->map[i][j + 1])))
 					return (err("Error\nMap should be surrounded by walls\n"), 1);
