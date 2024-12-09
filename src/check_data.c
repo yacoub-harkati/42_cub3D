@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2024/12/09 02:09:33 by root             ###   ########.fr       */
+/*   Updated: 2024/12/09 02:20:28 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,11 +337,45 @@ int	check_map_walls(t_map *map)
 	return (0);
 }
 
+int	check_map_elements(t_map *map)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] != '1' && map->map[i][j] != '0' &&
+				map->map[i][j] != 'N' && map->map[i][j] != 'S' &&
+				map->map[i][j] != 'W' && map->map[i][j] != 'E' &&
+				map->map[i][j] != ' ' && map->map[i][j] != '\t')
+				return (err("Error\nMap contains invalid elements\n"), 1);
+			if (map->map[i][j] == 'N' || map->map[i][j] == 'S' ||
+				map->map[i][j] == 'W' || map->map[i][j] == 'E')
+				count++;
+			j++;
+		}
+		i++;
+	}
+	if (count == 0)
+		return (err("Error\nMap doesnt contain a starting position\n"), 1);
+	else if (count > 1)
+		return (err("Error\nMap contains more than one starting position\n"), 1);
+	return (0);
+}
+
 int	check_map(t_map *map)
 {
 	if (check_map_borders(map->map))
 		return (1);
 	if (check_map_walls(map))
+		return (1);
+	if (check_map_elements(map))
 		return (1);
 	return (0);
 }
