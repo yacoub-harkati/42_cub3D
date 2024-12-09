@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2024/12/09 02:20:28 by root             ###   ########.fr       */
+/*   Updated: 2024/12/09 02:33:46 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,6 +369,31 @@ int	check_map_elements(t_map *map)
 	return (0);
 }
 
+int	check_map_path(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] == 'N' || map->map[i][j] == 'S' ||
+				map->map[i][j] == 'W' || map->map[i][j] == 'E')
+			{
+				if (map->map[i][j + 1] == '1' && map->map[i][j - 1] == '1' &&
+					map->map[i + 1][j] == '1' && map->map[i - 1][j] == '1')
+					return (err("Error\nPlayer cannot move\n"), 1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	check_map(t_map *map)
 {
 	if (check_map_borders(map->map))
@@ -376,6 +401,8 @@ int	check_map(t_map *map)
 	if (check_map_walls(map))
 		return (1);
 	if (check_map_elements(map))
+		return (1);
+	if (check_map_path(map))
 		return (1);
 	return (0);
 }
