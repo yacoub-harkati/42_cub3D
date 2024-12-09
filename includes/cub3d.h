@@ -8,6 +8,14 @@
 
 # include "libft.h"
 
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	char	position;
+}	t_player;
+
+
 typedef struct s_path
 {
 	char	*NO;
@@ -26,11 +34,12 @@ typedef struct s_map
 
 typedef struct	s_mlx
 {
-	char	**file;
-	t_map	*map;
-	t_path	*path;
-	int		*floor;
-	int		*ceiling;
+	char		**file;
+	t_map		*map;
+	t_path		*path;
+	int			*floor;
+	int			*ceiling;
+	t_player	*player;
 }	t_mlx;
 
 void	err(char *str);
@@ -46,5 +55,6 @@ t_map	*parse_map(char **file);
 void	get_map(char **file, t_map *map, int index);
 int		check_map(t_map *map);
 size_t	get_width(char **map);
+t_player	*get_player_info(char **map);
 
 #endif

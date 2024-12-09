@@ -6,11 +6,41 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:49:08 by root              #+#    #+#             */
-/*   Updated: 2024/12/09 01:37:16 by root             ###   ########.fr       */
+/*   Updated: 2024/12/09 22:12:22 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+t_player	*get_player_info(char **map)
+{
+	int			i;
+	int			j;
+	char		*c;
+	t_player	*player;
+
+	i = 0;
+	player = malloc(sizeof(t_player));
+	if (!player)
+		return (err("Error\n"), NULL);
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if ((c = ft_strchr("NSWE", map[i][j])))
+			{
+				player->x = i;
+				player->y = j;
+				player->position = c[0];
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (player);
+}
 
 t_map	*parse_map(char **file)
 {

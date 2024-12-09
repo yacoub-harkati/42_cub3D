@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:45:13 by root              #+#    #+#             */
-/*   Updated: 2024/12/09 01:38:35 by root             ###   ########.fr       */
+/*   Updated: 2024/12/09 22:13:08 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,8 @@ t_mlx	*init_struct(int ac, char **av)
 	map = mlx->map;
 	if (check_map(map))
 		exit (1);
+	mlx->player = get_player_info(mlx->map->map);
+	if (!mlx->player)
+		return (NULL);
 	return (mlx);
 }
