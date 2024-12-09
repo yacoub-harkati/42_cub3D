@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:45:13 by root              #+#    #+#             */
-/*   Updated: 2024/12/08 21:11:18 by root             ###   ########.fr       */
+/*   Updated: 2024/12/08 22:37:18 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_mlx	*init_struct(int ac, char **av)
 {
 	t_mlx	*mlx;
+	t_map	*map;
 
 	(void)ac;
 	mlx = malloc(sizeof(t_mlx));
@@ -24,7 +25,8 @@ t_mlx	*init_struct(int ac, char **av)
 	if (check_file(mlx))
 		exit (1);
 	mlx->map = parse_map(mlx->file);
-	if (check_map(mlx->map))
+	map = mlx->map;
+	if (check_map(map))
 		exit (1);
 	return (mlx);
 }

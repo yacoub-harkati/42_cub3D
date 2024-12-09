@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:49:08 by root              #+#    #+#             */
-/*   Updated: 2024/12/08 22:19:59 by root             ###   ########.fr       */
+/*   Updated: 2024/12/08 22:27:55 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ t_map	*parse_map(char **file)
 	while (file[i])
 	{
 		if (is_map_line(file[i]))
-		if (map_start == -1)
-			map_start = i;
-		map->height++;
+		{
+			if (map_start == -1)
+				map_start = i;
+			map->height++;
+		}
 		i++;
 	}
 	map->map = malloc(sizeof(char *) * (map->height + 1));

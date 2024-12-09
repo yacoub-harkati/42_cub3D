@@ -1,7 +1,7 @@
-NO ./assets/textures/no.png
-SO ./assets/textures/so.png
-WE ./assets/textures/we.png
-EA ./assets/textures/ea.png
+NO ./assets/textures/no.xpm
+SO ./assets/textures/so.xpm
+WE ./assets/textures/we.xpm
+EA ./assets/textures/ea.xpm
 
 F 220,100,0
 C 0,0,100
