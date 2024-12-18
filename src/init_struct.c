@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:45:13 by root              #+#    #+#             */
-/*   Updated: 2024/12/09 22:13:08 by root             ###   ########.fr       */
+/*   Updated: 2024/12/18 18:40:47 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,8 @@ t_mlx	*init_struct(int ac, char **av)
 	mlx->player = get_player_info(mlx->map->map);
 	if (!mlx->player)
 		return (NULL);
+	mlx->game = malloc(sizeof(t_game));
+	if (!mlx->game)
+		return (err("Error\n"), NULL);
 	return (mlx);
 }

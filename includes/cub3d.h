@@ -7,6 +7,7 @@
 # include <stdio.h>
 
 # include "libft.h"
+# include "mlx.h"
 
 typedef struct s_player
 {
@@ -32,6 +33,20 @@ typedef struct s_map
 }	t_map;
 
 
+typedef struct	s_textures
+{
+	void	*wall;
+	void	*floor;
+	void	*empty;
+}	t_textures;
+
+typedef struct	s_gmae
+{
+	void		*ptr;
+	void		*win;
+	t_textures	*textures;
+}	t_game;
+
 typedef struct	s_mlx
 {
 	char		**file;
@@ -40,6 +55,7 @@ typedef struct	s_mlx
 	int			*floor;
 	int			*ceiling;
 	t_player	*player;
+	t_game		*game;
 }	t_mlx;
 
 void	err(char *str);
@@ -56,5 +72,6 @@ void	get_map(char **file, t_map *map, int index);
 int		check_map(t_map *map);
 size_t	get_width(char **map);
 t_player	*get_player_info(char **map);
+void	init_game(t_mlx	*mlx);
 
 #endif
