@@ -6,7 +6,7 @@
 /*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 18:36:49 by rzarhoun          #+#    #+#             */
-/*   Updated: 2024/12/18 21:13:01 by rzarhoun         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:18:25 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,4 @@ void	init_game(t_mlx	*mlx)
 		!textures->no || !textures->so ||
 		!textures->we || !textures->ea)
 		return ;
-	mlx_loop(game->ptr);
 }
