@@ -35,9 +35,12 @@ typedef struct s_map
 
 typedef struct	s_textures
 {
-	void	*wall;
+	void	*ceiling;
 	void	*floor;
-	void	*empty;
+	void	*no;
+	void	*so;
+	void	*we;
+	void	*ea;
 }	t_textures;
 
 typedef struct	s_gmae
