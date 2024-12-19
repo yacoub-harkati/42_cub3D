@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+         #
+#    By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 13:45:21 by root              #+#    #+#              #
-#    Updated: 2024/12/18 19:19:30 by rzarhoun         ###   ########.fr        #
+#    Updated: 2024/12/19 19:50:22 by yaharkat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,13 +27,16 @@ all : ${NAME}
 
 ${NAME} : ${OBJS} 
 	make -C Libft
+	make -C minilibx-linux
 	cc ${OBJS} ${CFLAGS} -Lminilibx-linux -lmlx -L/usr/lib/X11 -lXext -lX11 -LLibft -lft -o ${NAME}
 
 clean :
 	make clean -C Libft
+	make clean -C minilibx-linux
 	rm -f ${OBJS}
 fclean : clean
 	make fclean -C Libft
+	make clean -C minilibx-linux
 	rm -f ${NAME}
 re : fclean all
 

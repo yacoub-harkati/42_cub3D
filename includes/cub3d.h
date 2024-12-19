@@ -7,8 +7,11 @@
 # include <stdio.h>
 
 # include "libft.h"
-# include "mlx.h"
+# include "../minilibx-linux/mlx.h"
 
+
+#define	WIN_WIDTH	1024
+#define	WIN_HEIGHT	768
 typedef struct s_player
 {
 	int		x;
