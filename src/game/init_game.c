@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 18:36:49 by rzarhoun          #+#    #+#             */
-/*   Updated: 2024/12/19 19:55:44 by yaharkat         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:53:51 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_game(t_mlx *mlx)
 	game->ptr = mlx_init();
 	if (!game->ptr)
 		return ;
-	game->win = mlx_new_window(game->ptr, WIN_HEIGHT, WIN_HEIGHT, "cub3d");
+	game->win = mlx_new_window(game->ptr, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	if (!game->win)
 		return ;
 	game->textures = malloc(sizeof(t_textures));

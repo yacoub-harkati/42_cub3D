@@ -6,7 +6,7 @@
 #    By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 13:45:21 by root              #+#    #+#              #
-#    Updated: 2024/12/19 19:50:22 by yaharkat         ###   ########.fr        #
+#    Updated: 2024/12/22 15:54:04 by yaharkat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ fclean : clean
 	make fclean -C Libft
 	make clean -C minilibx-linux
 	rm -f ${NAME}
-re : fclean all
+re : fclean all clean
 
 .SECONDARY: $(OBJS)
 .PHONY: all clean fclean re
