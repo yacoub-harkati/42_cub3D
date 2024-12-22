@@ -6,7 +6,7 @@
 #    By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 13:45:21 by root              #+#    #+#              #
-#    Updated: 2024/12/22 16:03:06 by yaharkat         ###   ########.fr        #
+#    Updated: 2024/12/22 16:08:30 by yaharkat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ all : ${NAME}
 ${NAME} : ${OBJS} 
 	make -C Libft
 	make -C minilibx-linux
-	cc ${OBJS} ${CFLAGS} -Lminilibx-linux -lmlx -L/usr/lib/X11 -lXext -lX11 -LLibft -lft -o ${NAME}
+	cc ${OBJS} ${CFLAGS} -Lminilibx-linux -lmlx -L/usr/lib/X11 -lXext -lX11 -LLibft -lft -O3 -ffast-math -o ${NAME}
 
 clean :
 	make clean -C Libft
