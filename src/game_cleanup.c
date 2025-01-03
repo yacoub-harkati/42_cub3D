@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:34:22 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 18:06:21 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 22:54:13 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	cleanup_textures(t_game *game)
 		cleanup_texture(game->ptr, &game->textures->so);
 		cleanup_texture(game->ptr, &game->textures->ea);
 		cleanup_texture(game->ptr, &game->textures->we);
+		cleanup_door_frames(game->ptr, game->textures->door);
 	}
 	free(game->textures);
 	game->textures = NULL;
