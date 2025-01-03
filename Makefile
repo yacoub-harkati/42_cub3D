@@ -6,7 +6,7 @@
 #    By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 13:45:21 by root              #+#    #+#              #
-#    Updated: 2025/01/04 00:20:23 by yaharkat         ###   ########.fr        #
+#    Updated: 2025/01/04 00:30:06 by yaharkat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ SRCS = $(SRC_DIR)/main.c \
        $(RAYCAST_DIR)/door_dda.c \
        $(RAYCAST_DIR)/walls_dda.c \
        $(RAYCAST_DIR)/cast_rays.c \
-       $(RAYCAST_DIR)/draw_map.c
+       $(RAYCAST_DIR)/draw_map.c \
+       $(RAYCAST_DIR)/draw_map_utils.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)

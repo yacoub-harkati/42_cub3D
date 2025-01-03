@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 23:48:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 23:09:21 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 00:29:43 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,5 +232,9 @@ void			init_ray(t_ray *ray, t_mlx *mlx, int x);
 void			perform_dda_doors(t_ray *ray, t_mlx *mlx, int *map_x,
 					int *map_y);
 void			calc_wall_height(t_ray *ray, t_mlx *mlx, int map_x, int map_y);
+void			set_pixel(t_mlx *mlx, int x, int y, int color);
+void			draw_map_border(t_mlx *mlx, t_minimap *mm);
+int				get_tile_color(t_mlx *mlx, int x, int y);
+void			draw_map_tile(t_mlx *mlx, t_minimap *mm, int x, int y);
 
 #endif
