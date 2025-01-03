@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2025/01/03 18:12:44 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:15:44 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ char	*get_path(char **file, char *str)
 		return (NULL);
 	free(s);
 	s = ft_strdup(split[1]);
+	free_matrix(split);
 	return (s);
 }
 
