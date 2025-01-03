@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 23:48:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 21:37:18 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 22:04:51 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define MOUSE_SENSITIVITY 0.0032
 
 # define DOOR_FRAMES 24
-# define FRAME_DELAY 8
+# define FRAME_DELAY 2
 # define KEY_E 101
 # define DOOR_RANGE 2.0
 # define COLOR_TO_REPLACE 16711890
