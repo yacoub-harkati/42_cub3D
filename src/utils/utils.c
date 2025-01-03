@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:15:25 by root              #+#    #+#             */
-/*   Updated: 2024/12/08 22:20:51 by root             ###   ########.fr       */
+/*   Updated: 2024/12/30 18:06:43 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	count_lines(char *av)
 		count++;
 		free(line);
 	}
-	close (fd);
+	close(fd);
 	return (count);
 }
 
@@ -57,8 +57,8 @@ void	get_map(char **file, t_map *map, int index)
 
 void	get_file(char *str, char **file)
 {
-	int		i;
-	int		fd;
+	int	i;
+	int	fd;
 
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
@@ -74,8 +74,8 @@ void	get_file(char *str, char **file)
 
 size_t	get_width(char **map)
 {
-	int	i;
-	size_t width;
+	int		i;
+	size_t	width;
 
 	i = 0;
 	width = ft_strlen(map[0]);
@@ -86,4 +86,9 @@ size_t	get_width(char **map)
 		i++;
 	}
 	return (width);
+}
+
+int	create_rgb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
 }

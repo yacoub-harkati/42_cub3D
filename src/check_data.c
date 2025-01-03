@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2024/12/09 02:33:46 by root             ###   ########.fr       */
+/*   Updated: 2024/12/30 23:59:15 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_identifier(char **file, char *str)
 		if (ft_strnstr(file[i], str, ft_strlen(file[i])))
 		{
 			if (ft_strncmp(file[i], str, ft_strlen(str)))
-				err("Error\nIdentifier and path order is invalid\n"), exit (1);
+				err("Error\nIdentifier and path order is invalid\n"), exit(1);
 			count++;
 		}
 		i++;
@@ -32,7 +32,8 @@ int	check_identifier(char **file, char *str)
 	if (count == 0)
 		return (err("Error\n"), err(str), err(" identifier doesnt exist\n"), 0);
 	else if (count > 1)
-		return (err("Error\n"), err(str), err(" identifier is set more than one time\n"), 0);
+		return (err("Error\n"), err(str),
+			err(" identifier is set more than one time\n"), 0);
 	else
 		return (1);
 }
@@ -70,9 +71,9 @@ int	check_order(char **file)
 			c = i;
 		i++;
 	}
-	if (no > so || no > we || no > ea || no > f || no > c ||
-		so > we || so > ea || so > f || so > c || we > ea ||
-		we > f || we > c || ea > f || ea > c || f > c)
+	if (no > so || no > we || no > ea || no > f || no > c || so > we || so > ea
+		|| so > f || so > c || we > ea || we > f || we > c || ea > f || ea > c
+		|| f > c)
 		return (err("Error\nIdentifiers arent in right order\n"), 1);
 	return (0);
 }
@@ -102,42 +103,45 @@ int	is_xpm_png_file(char *file)
 	int	len;
 
 	len = ft_strlen(file);
-	if ((file[len - 4] == '.' && file[len - 3] == 'x' &&
-		file[len - 2] == 'p' && file[len - 1] == 'm') ||
-		(file[len - 4] == '.' && file[len - 3] == 'p' &&
-		file[len - 2] == 'n' && file[len - 1] == 'g'))
+	if ((file[len - 4] == '.' && file[len - 3] == 'x' && file[len - 2] == 'p'
+			&& file[len - 1] == 'm') || (file[len - 4] == '.' && file[len
+			- 3] == 'p' && file[len - 2] == 'n' && file[len - 1] == 'g'))
 		return (1);
 	return (0);
 }
 
 int	check_path_file(t_path *path)
 {
-	int		fd;
+	int	fd;
 
 	fd = open(path->NO, O_RDONLY);
 	if (fd < 0)
 		return (err("Error\nNO texture file doesnt exist\n"), 1);
-	close (fd);
+	close(fd);
 	fd = open(path->SO, O_RDONLY);
 	if (fd < 0)
 		return (err("Error\nSO texture file doesnt exist\n"), 1);
-	close (fd);
+	close(fd);
 	fd = open(path->WE, O_RDONLY);
 	if (fd < 0)
 		return (err("Error\nWE texture file doesnt exist\n"), 1);
-	close (fd);
+	close(fd);
 	fd = open(path->EA, O_RDONLY);
 	if (fd < 0)
 		return (err("Error\nEA texture file doesnt exist\n"), 1);
-	close (fd);
+	close(fd);
 	if (!is_xpm_png_file(path->NO))
-		return (err("Error\nNO texture file have to be a .xpm or .png file\n"), 1);
+		return (err("Error\nNO texture file have to be a .xpm or .png file\n"),
+			1);
 	if (!is_xpm_png_file(path->SO))
-		return (err("Error\nSO texture file have to be a .xpm or .png file\n"), 1);
+		return (err("Error\nSO texture file have to be a .xpm or .png file\n"),
+			1);
 	if (!is_xpm_png_file(path->WE))
-		return (err("Error\nWE texture file have to be a .xpm or .png file\n"), 1);
+		return (err("Error\nWE texture file have to be a .xpm or .png file\n"),
+			1);
 	if (!is_xpm_png_file(path->EA))
-		return (err("Error\nEA texture file have to be a .xpm or .png file\n"), 1);
+		return (err("Error\nEA texture file have to be a .xpm or .png file\n"),
+			1);
 	return (0);
 }
 
@@ -148,7 +152,8 @@ int	check_rgb(t_mlx *mlx)
 	i = 0;
 	while (i < 3)
 	{
-		if ((mlx->floor[i] < 0 || mlx->floor[i] > 255) || (mlx->ceiling[i] < 0 || mlx->ceiling[i] > 255))
+		if ((mlx->floor[i] < 0 || mlx->floor[i] > 255) || (mlx->ceiling[i] < 0
+				|| mlx->ceiling[i] > 255))
 			return (err("Error\nInvalid rgb color\n"), 1);
 		i++;
 	}
@@ -165,8 +170,10 @@ int	*convert_char_int(char **str)
 	while (i < 3)
 	{
 		res[i] = ft_atoi(str[i]);
+		free(str[i]);
 		i++;
 	}
+	free(str);
 	return (res);
 }
 
@@ -210,16 +217,14 @@ int	is_map_line(char *line)
 	int	i;
 
 	i = 0;
-	if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2) ||
-		!ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2) ||
-		!ft_strncmp(line, "C", 1) || !ft_strncmp(line, "F", 1))
+	if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2)
+		|| !ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2)
+		|| !ft_strncmp(line, "C", 1) || !ft_strncmp(line, "F", 1))
 		return (0);
 	while (line[i])
 	{
-		if (line[i] == '0' || line[i] == '1' || 
-			line[i] == ' ' || line[i] == 'N' || 
-			line[i] == 'S' || line[i] == 'E' || 
-			line[i] == 'W')
+		if (line[i] == '0' || line[i] == '1' || line[i] == ' ' || line[i] == 'N'
+			|| line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
 			return (1);
 		i++;
 	}
@@ -255,9 +260,10 @@ int	check_map_is_at_end(char **file)
 
 int	check_file(t_mlx *mlx)
 {
-	if (!check_identifier(mlx->file, "NO") || !check_identifier(mlx->file, "SO") ||
-		!check_identifier(mlx->file, "WE") || !check_identifier(mlx->file, "EA") ||
-		!check_identifier(mlx->file, "F") || !check_identifier(mlx->file, "C"))
+	if (!check_identifier(mlx->file, "NO") || !check_identifier(mlx->file, "SO")
+		|| !check_identifier(mlx->file, "WE") || !check_identifier(mlx->file,
+			"EA") || !check_identifier(mlx->file, "F")
+		|| !check_identifier(mlx->file, "C"))
 		return (1);
 	if (check_order(mlx->file))
 		return (1);
@@ -308,7 +314,8 @@ int	check_map_walls(t_map *map)
 	i = 0;
 	while (map->map[map->height - 1][i])
 	{
-		while (map->map[map->height - 1][i] == ' ' || map->map[map->height - 1][i] == '\t')
+		while (map->map[map->height - 1][i] == ' ' || map->map[map->height
+			- 1][i] == '\t')
 			i++;
 		if (map->map[map->height - 1][i] != '1')
 			return (err("Error\nMap should be surrounded by walls\n"), 1);
@@ -322,13 +329,24 @@ int	check_map_walls(t_map *map)
 		{
 			if (map->map[i][j] == ' ')
 			{
-				if (i > 0 && map->map[i - 1][j] != '1' && map->map[i - 1][j] != ' ' && ft_isalnum(map->map[i - 1][j]))
-					return (err("Error\nMap should be surrounded by walls\n"), 1);
-				if (i < map->height - 1 && map->map[i + 1][j] != '1' && map->map[i + 1][j] != ' ' && ft_isalnum(map->map[i + 1][j]))
-					return (err("Error\nMap should be surrounded by walls\n"), 1);
-				if ((map->map[i][j - 1] && map->map[i][j - 1] != '1' && map->map[i][j - 1] != ' ' && ft_isalnum(map->map[i][j - 1])) ||
-					(map->map[i][j + 1] && map->map[i][j + 1] != '1' && map->map[i][j + 1] != ' ' && ft_isalnum(map->map[i][j + 1])))
-					return (err("Error\nMap should be surrounded by walls\n"), 1);
+				if (i > 0 && map->map[i - 1][j] != '1' && map->map[i
+					- 1][j] != ' ' && ft_isalnum(map->map[i - 1][j]))
+					return (err("Error\nMap should be surrounded by walls\n"),
+						1);
+				if (i < map->height - 1 && map->map[i + 1][j] != '1'
+					&& map->map[i + 1][j] != ' ' && ft_isalnum(map->map[i
+						+ 1][j]))
+					return (err("Error\nMap should be surrounded by walls\n"),
+						1);
+				if (j > 0 && map->map[i][j - 1] != '1' && map->map[i][j
+					- 1] != ' ' && ft_isalnum(map->map[i][j - 1]))
+					return (err("Error\nMap should be surrounded by walls\n"),
+						1);
+				if (map->map[i][j + 1] && map->map[i][j + 1] != '1'
+					&& map->map[i][j + 1] != ' ' && ft_isalnum(map->map[i][j
+						+ 1]))
+					return (err("Error\nMap should be surrounded by walls\n"),
+						1);
 			}
 			j++;
 		}
@@ -350,13 +368,13 @@ int	check_map_elements(t_map *map)
 		j = 0;
 		while (map->map[i][j])
 		{
-			if (map->map[i][j] != '1' && map->map[i][j] != '0' &&
-				map->map[i][j] != 'N' && map->map[i][j] != 'S' &&
-				map->map[i][j] != 'W' && map->map[i][j] != 'E' &&
-				map->map[i][j] != ' ' && map->map[i][j] != '\t')
+			if (map->map[i][j] != '1' && map->map[i][j] != '0'
+				&& map->map[i][j] != 'N' && map->map[i][j] != 'S'
+				&& map->map[i][j] != 'W' && map->map[i][j] != 'E'
+				&& map->map[i][j] != ' ' && map->map[i][j] != '\t')
 				return (err("Error\nMap contains invalid elements\n"), 1);
-			if (map->map[i][j] == 'N' || map->map[i][j] == 'S' ||
-				map->map[i][j] == 'W' || map->map[i][j] == 'E')
+			if (map->map[i][j] == 'N' || map->map[i][j] == 'S'
+				|| map->map[i][j] == 'W' || map->map[i][j] == 'E')
 				count++;
 			j++;
 		}
@@ -365,7 +383,8 @@ int	check_map_elements(t_map *map)
 	if (count == 0)
 		return (err("Error\nMap doesnt contain a starting position\n"), 1);
 	else if (count > 1)
-		return (err("Error\nMap contains more than one starting position\n"), 1);
+		return (err("Error\nMap contains more than one starting position\n"),
+			1);
 	return (0);
 }
 
@@ -380,11 +399,11 @@ int	check_map_path(t_map *map)
 		j = 0;
 		while (map->map[i][j])
 		{
-			if (map->map[i][j] == 'N' || map->map[i][j] == 'S' ||
-				map->map[i][j] == 'W' || map->map[i][j] == 'E')
+			if (map->map[i][j] == 'N' || map->map[i][j] == 'S'
+				|| map->map[i][j] == 'W' || map->map[i][j] == 'E')
 			{
-				if (map->map[i][j + 1] == '1' && map->map[i][j - 1] == '1' &&
-					map->map[i + 1][j] == '1' && map->map[i - 1][j] == '1')
+				if (map->map[i][j + 1] == '1' && map->map[i][j - 1] == '1'
+					&& map->map[i + 1][j] == '1' && map->map[i - 1][j] == '1')
 					return (err("Error\nPlayer cannot move\n"), 1);
 			}
 			j++;
