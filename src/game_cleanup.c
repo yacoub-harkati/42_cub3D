@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:34:22 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 02:12:10 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 02:46:12 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	close_window(t_mlx *mlx)
 {
 	if (!mlx || !mlx->game)
 		return (0);
-	mlx_loop_end(mlx->game->ptr);
 	if (mlx->game->running)
 	{
+		mlx_loop_end(mlx->game->ptr);
 		mlx->game->running = 0;
 		if (mlx->game->screen)
 			cleanup_screen(mlx->game);

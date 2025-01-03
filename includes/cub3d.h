@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 23:48:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 02:30:09 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 03:29:36 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define KEY_D 100
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
+
+# define MOUSE_SENSITIVITY 0.0032
 
 typedef struct s_img
 {
@@ -177,6 +179,9 @@ void			draw_minimap(t_mlx *mlx);
 int				handle_keypress(int key, t_mlx *mlx);
 int				close_window(t_mlx *mlx);
 int				game_loop(t_mlx *mlx);
+
+int				handle_mouse_move(int x, int y, t_mlx *mlx);
+void			rotate_camera(t_mlx *mlx, double rotation);
 
 int				create_rgb(int r, int g, int b);
 void			err(char *str);

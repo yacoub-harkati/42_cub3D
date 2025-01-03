@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 02:24:29 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 02:25:09 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 02:50:51 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,7 @@ void	move_player(t_mlx *mlx, int key)
 
 void	rotate_player(t_mlx *mlx, int direction)
 {
-	double	old_dir_x;
-	double	old_plane_x;
-	double	rotation;
-
-	old_dir_x = mlx->player->dir_x;
-	old_plane_x = mlx->player->plane_x;
-	rotation = ROT_SPEED * direction;
-	mlx->player->dir_x = mlx->player->dir_x * cos(rotation) - mlx->player->dir_y
-		* sin(rotation);
-	mlx->player->dir_y = old_dir_x * sin(rotation) + mlx->player->dir_y
-		* cos(rotation);
-	mlx->player->plane_x = mlx->player->plane_x * cos(rotation)
-		- mlx->player->plane_y * sin(rotation);
-	mlx->player->plane_y = old_plane_x * sin(rotation) + mlx->player->plane_y
-		* cos(rotation);
+	rotate_camera(mlx, ROT_SPEED * direction);
 }
 
 int	handle_keypress(int key, t_mlx *mlx)

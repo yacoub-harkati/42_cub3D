@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:57:31 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 01:59:16 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 02:42:44 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,10 @@ static void	calc_wall_height(t_ray *ray, t_mlx *mlx, int map_x, int map_y)
 
 void	cast_rays(t_mlx *mlx)
 {
-	t_ray ray;
-	int x;
-	int map_x;
-	int map_y;
+	t_ray	ray;
+	int		x;
+	int		map_x;
+	int		map_y;
 
 	if (!mlx || !mlx->player || !mlx->map || !mlx->game || !mlx->game->screen
 		|| !mlx->game->screen->addr)
