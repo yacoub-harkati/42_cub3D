@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2025/01/03 18:15:44 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 20:06:54 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -376,7 +376,8 @@ int	check_map_elements(t_map *map)
 			if (map->map[i][j] != '1' && map->map[i][j] != '0'
 				&& map->map[i][j] != 'N' && map->map[i][j] != 'S'
 				&& map->map[i][j] != 'W' && map->map[i][j] != 'E'
-				&& map->map[i][j] != ' ' && map->map[i][j] != '\t')
+				&& map->map[i][j] != ' ' && map->map[i][j] != '\t'
+				&& map->map[i][j] != 'D')
 				return (err("Error\nMap contains invalid elements\n"), 1);
 			if (map->map[i][j] == 'N' || map->map[i][j] == 'S'
 				|| map->map[i][j] == 'W' || map->map[i][j] == 'E')

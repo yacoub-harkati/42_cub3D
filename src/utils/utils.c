@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:15:25 by root              #+#    #+#             */
-/*   Updated: 2025/01/03 18:14:05 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 19:06:15 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,11 @@ void	free_matrix(char **str)
 		i++;
 	}
 	free(str);
+}
+
+void	*ft_ternary(int condition, void *if_true, void *if_false)
+{
+	if (condition)
+		return (if_true);
+	return (if_false);
 }

@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:57:31 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 04:58:01 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 20:15:10 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	init_ray(t_ray *ray, t_mlx *mlx, int x)
 	else
 		ray->delta_dist_y = fabs(1.0 / ray->ray_dir_y);
 	ray->hit = 0;
+	ray->hit_type = '0';
 }
 
 static void	calc_step_dist(t_ray *ray, t_mlx *mlx, int map_x, int map_y)
@@ -75,10 +76,15 @@ static void	perform_dda(t_ray *ray, t_mlx *mlx, int *map_x, int *map_y)
 		{
 			ray->hit = 1;
 			ray->side = 2;
+			ray->hit_type = '0';
 			break ;
 		}
-		if (mlx->map->map[*map_y] && mlx->map->map[*map_y][*map_x] == '1')
+		if (mlx->map->map[*map_y] && (mlx->map->map[*map_y][*map_x] == '1'
+				|| mlx->map->map[*map_y][*map_x] == 'D'))
+		{
 			ray->hit = 1;
+			ray->hit_type = mlx->map->map[*map_y][*map_x];
+		}
 	}
 }
 

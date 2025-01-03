@@ -6,13 +6,13 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:34:47 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 03:29:12 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 19:46:59 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_img	*init_texture(void *mlx_ptr, char *path)
+t_img	*init_texture(void *mlx_ptr, char *path)
 {
 	t_img	*texture;
 	int		width;
@@ -47,8 +47,10 @@ static int	init_textures(t_mlx *mlx)
 	mlx->game->textures->so = init_texture(mlx->game->ptr, mlx->path->SO);
 	mlx->game->textures->ea = init_texture(mlx->game->ptr, mlx->path->EA);
 	mlx->game->textures->we = init_texture(mlx->game->ptr, mlx->path->WE);
+	mlx->game->textures->door = init_door_animation(mlx->game->ptr);
 	if (!mlx->game->textures->no || !mlx->game->textures->so
-		|| !mlx->game->textures->ea || !mlx->game->textures->we)
+		|| !mlx->game->textures->ea || !mlx->game->textures->we
+		|| !mlx->game->textures->door)
 		return (0);
 	return (1);
 }

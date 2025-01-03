@@ -6,7 +6,7 @@
 #    By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 13:45:21 by root              #+#    #+#              #
-#    Updated: 2025/01/03 02:55:31 by yaharkat         ###   ########.fr        #
+#    Updated: 2025/01/03 19:51:19 by yaharkat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS = $(SRC_DIR)/main.c \
        $(UTILS_DIR)/error.c \
        $(UTILS_DIR)/utils.c \
        $(SRC_DIR)/init_struct.c \
+       $(SRC_DIR)/door_handler.c \
        $(SRC_DIR)/parse_data.c \
        $(SRC_DIR)/check_data.c \
        $(SRC_DIR)/game_loop.c \

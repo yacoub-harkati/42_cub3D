@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 02:24:29 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 02:50:51 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 20:03:40 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,25 @@ static void	handle_movement(t_mlx *mlx, double *new_x, double *new_y, int key)
 	}
 }
 
+static int	can_move_to(t_mlx *mlx, double new_x, double new_y)
+{
+	char	cell;
+
+	if (new_x < 0 || new_x >= mlx->map->width || new_y < 0
+		|| new_y >= mlx->map->height)
+		return (0);
+	cell = mlx->map->map[(int)new_y][(int)new_x];
+	if (cell == '1')
+		return (0);
+	if (cell == 'D')
+	{
+		if (!mlx->game->textures->door
+			|| mlx->game->textures->door->current_frame < DOOR_FRAMES - 1)
+			return (0);
+	}
+	return (1);
+}
+
 void	move_player(t_mlx *mlx, int key)
 {
 	double	new_x;
@@ -44,9 +63,7 @@ void	move_player(t_mlx *mlx, int key)
 	new_x = mlx->player->x;
 	new_y = mlx->player->y;
 	handle_movement(mlx, &new_x, &new_y, key);
-	if (new_x >= 0 && new_x < mlx->map->width && new_y >= 0
-		&& new_y < mlx->map->height
-		&& mlx->map->map[(int)new_y][(int)new_x] != '1')
+	if (can_move_to(mlx, new_x, new_y))
 	{
 		mlx->player->x = new_x;
 		mlx->player->y = new_y;
@@ -68,5 +85,7 @@ int	handle_keypress(int key, t_mlx *mlx)
 		rotate_player(mlx, 1);
 	if (key == KEY_RIGHT)
 		rotate_player(mlx, -1);
+	if (key == KEY_E)
+		handle_door_interaction(mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 23:48:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 18:14:25 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 20:12:36 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@
 
 # define MOUSE_SENSITIVITY 0.0032
 
+# define DOOR_FRAMES 24
+# define FRAME_DELAY 8
+# define KEY_E 101
+# define DOOR_RANGE 2.0
+
 typedef struct s_img
 {
 	void		*img;
@@ -48,6 +53,14 @@ typedef struct s_img
 	int			endian;
 }				t_img;
 
+typedef struct s_door_anim
+{
+	t_img		*frames[DOOR_FRAMES];
+	int			current_frame;
+	int			frame_counter;
+	int			is_animating;
+	int			animation_dir;
+}				t_door_anim;
 typedef struct s_player
 {
 	double		x;
@@ -73,6 +86,7 @@ typedef struct s_ray
 	int			step_y;
 	int			hit;
 	int			side;
+	char		hit_type;
 	int			line_height;
 	int			draw_start;
 	int			draw_end;
@@ -128,6 +142,7 @@ typedef struct s_textures
 	t_img		*so;
 	t_img		*we;
 	t_img		*ea;
+	t_door_anim	*door;
 	int			*floor;
 	int			*ceiling;
 }				t_textures;
@@ -178,6 +193,7 @@ void			draw_minimap(t_mlx *mlx);
 
 int				handle_keypress(int key, t_mlx *mlx);
 int				close_window(t_mlx *mlx);
+void			cleanup_door_frames(void *mlx_ptr, t_door_anim *door);
 int				game_loop(t_mlx *mlx);
 
 int				handle_mouse_move(int x, int y, t_mlx *mlx);
@@ -188,5 +204,10 @@ void			err(char *str);
 int				ft_strcmp(char *s1, char *s2);
 size_t			get_width(char **map);
 void			free_matrix(char **str);
-
+void			*ft_ternary(int condition, void *if_true, void *if_false);
+t_door_anim		*init_door_animation(void *mlx_ptr);
+void			cleanup_door_frames(void *mlx_ptr, t_door_anim *door);
+void			update_door_animation(t_door_anim *door);
+void			handle_door_interaction(t_mlx *mlx);
+t_img			*init_texture(void *mlx_ptr, char *path);
 #endif

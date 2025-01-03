@@ -6,12 +6,11 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 01:49:47 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 02:25:01 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 20:01:41 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 static void	draw_floor_ceiling(t_mlx *mlx)
 {
@@ -25,12 +24,12 @@ static void	draw_floor_ceiling(t_mlx *mlx)
 		while (x < WIN_WIDTH)
 		{
 			if (y < WIN_HEIGHT / 2)
-				mlx->game->screen->addr[y * WIN_WIDTH + x]
-					= create_rgb(mlx->ceiling[0], mlx->ceiling[1],
+				mlx->game->screen->addr[y * WIN_WIDTH
+					+ x] = create_rgb(mlx->ceiling[0], mlx->ceiling[1],
 						mlx->ceiling[2]);
 			else
-				mlx->game->screen->addr[y * WIN_WIDTH + x]
-					= create_rgb(mlx->floor[0], mlx->floor[1],
+				mlx->game->screen->addr[y * WIN_WIDTH
+					+ x] = create_rgb(mlx->floor[0], mlx->floor[1],
 						mlx->floor[2]);
 			x++;
 		}
@@ -52,12 +51,13 @@ int	game_loop(t_mlx *mlx)
 	if (validate_game_state(mlx))
 		return (1);
 	if (mlx->game->screen->addr)
-		ft_memset(mlx->game->screen->addr, 0,
-			WIN_WIDTH * WIN_HEIGHT * sizeof(int));
+		ft_memset(mlx->game->screen->addr, 0, WIN_WIDTH * WIN_HEIGHT
+			* sizeof(int));
 	if (mlx->game->screen->addr)
 		draw_floor_ceiling(mlx);
 	if (mlx->map && mlx->player && mlx->game->running)
 	{
+		update_door_animation(mlx->game->textures->door);
 		cast_rays(mlx);
 		draw_minimap(mlx);
 	}
