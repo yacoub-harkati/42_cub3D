@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:42:54 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 20:19:02 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 21:21:11 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ t_door_anim	*init_door_animation(void *mlx_ptr)
 			cleanup_door_frames(mlx_ptr, door);
 			return (NULL);
 		}
+		make_color_transparent(door->frames[i]);
 		i++;
 	}
 	door->current_frame = 0;

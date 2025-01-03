@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 01:48:58 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 20:21:53 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 21:38:56 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,22 +75,26 @@ static void	draw_texture_line(t_mlx *mlx, t_ray *ray, t_draw_data *data)
 		tex_y = (int)data->tex_pos & (TEXTURE_SIZE - 1);
 		data->tex_pos += data->step;
 		color = data->texture->addr[TEXTURE_SIZE * tex_y + data->tex_x];
-		data->r = ((color >> 16) & 0xFF) * data->shade;
-		data->g = ((color >> 8) & 0xFF) * data->shade;
-		data->b = (color & 0xFF) * data->shade;
-		data->r = *(int *)ft_ternary((data->r > 255), &white, &data->r);
-		data->g = *(int *)ft_ternary((data->g > 255), &white, &data->g);
-		data->b = *(int *)ft_ternary((data->b > 255), &white, &data->b);
-		color = create_rgb(data->r, data->g, data->b);
-		mlx->game->screen->addr[y * WIN_WIDTH - data->x + WIN_WIDTH] = color;
+		if (color != TRANSPARENT_COLOR)
+		{
+			data->r = ((color >> 16) & 0xFF) * data->shade;
+			data->g = ((color >> 8) & 0xFF) * data->shade;
+			data->b = (color & 0xFF) * data->shade;
+			data->r = *(int *)ft_ternary((data->r > 255), &white, &data->r);
+			data->g = *(int *)ft_ternary((data->g > 255), &white, &data->g);
+			data->b = *(int *)ft_ternary((data->b > 255), &white, &data->b);
+			color = create_rgb(data->r, data->g, data->b);
+			mlx->game->screen->addr[y * WIN_WIDTH - data->x
+				+ WIN_WIDTH] = color;
+		}
 		y++;
 	}
 }
 
 void	draw_walls(t_mlx *mlx, t_ray *ray, int x)
 {
-	t_draw_data data;
-	double wall_x;
+	t_draw_data	data;
+	double		wall_x;
 
 	data.texture = select_texture(mlx, ray);
 	calc_texture_coords(ray, mlx, &wall_x, &data.tex_x, ray->hit_type);

@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 23:48:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 20:12:36 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 21:37:18 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@
 # define FRAME_DELAY 8
 # define KEY_E 101
 # define DOOR_RANGE 2.0
+# define COLOR_TO_REPLACE 16711890
+# define TRANSPARENT_COLOR 16515796
 
 typedef struct s_img
 {
@@ -92,6 +94,12 @@ typedef struct s_ray
 	int			draw_end;
 	int			tex_x;
 	double		wall_x;
+	double		door_dist;
+	int			has_door;
+	double		wall_dist;
+	int			door_tex_x;
+	int			wall_tex_x;
+	int			original_x;
 }				t_ray;
 
 typedef struct s_draw_data
@@ -210,4 +218,5 @@ void			cleanup_door_frames(void *mlx_ptr, t_door_anim *door);
 void			update_door_animation(t_door_anim *door);
 void			handle_door_interaction(t_mlx *mlx);
 t_img			*init_texture(void *mlx_ptr, char *path);
+void			make_color_transparent(t_img *img);
 #endif

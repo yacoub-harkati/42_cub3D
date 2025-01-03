@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:57:31 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 20:15:10 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 21:48:27 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void	calc_step_dist(t_ray *ray, t_mlx *mlx, int map_x, int map_y)
 
 static void	perform_dda(t_ray *ray, t_mlx *mlx, int *map_x, int *map_y)
 {
+	ray->has_door = 0;
 	while (ray->hit == 0)
 	{
 		if (ray->side_dist_x < ray->side_dist_y)
@@ -71,6 +72,7 @@ static void	perform_dda(t_ray *ray, t_mlx *mlx, int *map_x, int *map_y)
 			*map_y += ray->step_y;
 			ray->side = 1;
 		}
+		/* Check bounds */
 		if (*map_x < 0 || *map_x >= mlx->map->width || *map_y < 0
 			|| *map_y >= mlx->map->height)
 		{
@@ -79,11 +81,31 @@ static void	perform_dda(t_ray *ray, t_mlx *mlx, int *map_x, int *map_y)
 			ray->hit_type = '0';
 			break ;
 		}
-		if (mlx->map->map[*map_y] && (mlx->map->map[*map_y][*map_x] == '1'
-				|| mlx->map->map[*map_y][*map_x] == 'D'))
+		/* If we hit a door */
+		if (mlx->map->map[*map_y][*map_x] == 'D')
+		{
+			ray->has_door = 1;
+			ray->hit = 1;
+			ray->hit_type = 'D'; // Add this line
+			if (ray->side == 0)
+				ray->perp_wall_dist = ((*map_x - mlx->player->x + (1
+								- ray->step_x) / 2) / ray->ray_dir_x);
+			else
+				ray->perp_wall_dist = ((*map_y - mlx->player->y + (1
+								- ray->step_y) / 2) / ray->ray_dir_y);
+			break ; // Break instead of continue
+		}
+		/* If we hit a wall */
+		if (mlx->map->map[*map_y][*map_x] == '1')
 		{
 			ray->hit = 1;
-			ray->hit_type = mlx->map->map[*map_y][*map_x];
+			ray->hit_type = '1'; // Add this line
+			if (ray->side == 0)
+				ray->perp_wall_dist = ((*map_x - mlx->player->x + (1
+								- ray->step_x) / 2) / ray->ray_dir_x);
+			else
+				ray->perp_wall_dist = ((*map_y - mlx->player->y + (1
+								- ray->step_y) / 2) / ray->ray_dir_y);
 		}
 	}
 }
@@ -119,6 +141,7 @@ void	cast_rays(t_mlx *mlx)
 	if (!mlx || !mlx->player || !mlx->map || !mlx->game || !mlx->game->screen
 		|| !mlx->game->screen->addr)
 		return ;
+	/* First pass: render everything except doors */
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
@@ -128,7 +151,21 @@ void	cast_rays(t_mlx *mlx)
 		calc_step_dist(&ray, mlx, map_x, map_y);
 		perform_dda(&ray, mlx, &map_x, &map_y);
 		calc_wall_height(&ray, mlx, map_x, map_y);
-		if (ray.side != 2)
+		if (ray.hit_type != 'D')
+			draw_walls(mlx, &ray, x);
+		x++;
+	}
+	/* Second pass: render only doors */
+	x = 0;
+	while (x < WIN_WIDTH)
+	{
+		map_x = (int)floor(mlx->player->x);
+		map_y = (int)floor(mlx->player->y);
+		init_ray(&ray, mlx, x);
+		calc_step_dist(&ray, mlx, map_x, map_y);
+		perform_dda(&ray, mlx, &map_x, &map_y);
+		calc_wall_height(&ray, mlx, map_x, map_y);
+		if (ray.hit_type == 'D')
 			draw_walls(mlx, &ray, x);
 		x++;
 	}

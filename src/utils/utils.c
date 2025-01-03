@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:15:25 by root              #+#    #+#             */
-/*   Updated: 2025/01/03 19:06:15 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 21:23:38 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	create_rgb(int r, int g, int b)
 
 void	free_matrix(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -111,4 +111,21 @@ void	*ft_ternary(int condition, void *if_true, void *if_false)
 	if (condition)
 		return (if_true);
 	return (if_false);
+}
+
+void	make_color_transparent(t_img *img)
+{
+	int i;
+	int total_pixels;
+
+	if (!img || !img->addr)
+		return ;
+	total_pixels = TEXTURE_SIZE * TEXTURE_SIZE;
+	i = 0;
+	while (i < total_pixels)
+	{
+		if (img->addr[i] == COLOR_TO_REPLACE)
+			img->addr[i] = TRANSPARENT_COLOR;
+		i++;
+	}
 }
