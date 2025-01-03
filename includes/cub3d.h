@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 23:48:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 22:04:51 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 22:12:42 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_door_anim
 	int			is_animating;
 	int			animation_dir;
 }				t_door_anim;
+
 typedef struct s_player
 {
 	double		x;
@@ -94,12 +95,8 @@ typedef struct s_ray
 	int			draw_end;
 	int			tex_x;
 	double		wall_x;
-	double		door_dist;
 	int			has_door;
 	double		wall_dist;
-	int			door_tex_x;
-	int			wall_tex_x;
-	int			original_x;
 }				t_ray;
 
 typedef struct s_draw_data
@@ -195,6 +192,7 @@ t_player		*get_player_info(char **map);
 void			move_player(t_mlx *mlx, int key);
 void			rotate_player(t_mlx *mlx, int direction);
 
+t_img			*init_texture(void *mlx_ptr, char *path);
 void			cast_rays(t_mlx *mlx);
 void			draw_walls(t_mlx *mlx, t_ray *ray, int x);
 void			draw_minimap(t_mlx *mlx);
@@ -207,16 +205,17 @@ int				game_loop(t_mlx *mlx);
 int				handle_mouse_move(int x, int y, t_mlx *mlx);
 void			rotate_camera(t_mlx *mlx, double rotation);
 
+t_door_anim		*init_door_animation(void *mlx_ptr);
+void			cleanup_door_frames(void *mlx_ptr, t_door_anim *door);
+void			update_door_animation(t_door_anim *door);
+void			handle_door_interaction(t_mlx *mlx);
+void			make_color_transparent(t_img *img);
+
 int				create_rgb(int r, int g, int b);
 void			err(char *str);
 int				ft_strcmp(char *s1, char *s2);
 size_t			get_width(char **map);
 void			free_matrix(char **str);
 void			*ft_ternary(int condition, void *if_true, void *if_false);
-t_door_anim		*init_door_animation(void *mlx_ptr);
-void			cleanup_door_frames(void *mlx_ptr, t_door_anim *door);
-void			update_door_animation(t_door_anim *door);
-void			handle_door_interaction(t_mlx *mlx);
-t_img			*init_texture(void *mlx_ptr, char *path);
-void			make_color_transparent(t_img *img);
+
 #endif
