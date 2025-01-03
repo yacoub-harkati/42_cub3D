@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 01:32:28 by root              #+#    #+#             */
-/*   Updated: 2024/12/30 23:59:15 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:12:44 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,11 @@ char	*get_path(char **file, char *str)
 	if (s)
 		s = ft_strtrim(s, "\n");
 	split = ft_split(s, ' ');
-	return (split[1]);
+	if (!split)
+		return (NULL);
+	free(s);
+	s = ft_strdup(split[1]);
+	return (s);
 }
 
 int	is_xpm_png_file(char *file)

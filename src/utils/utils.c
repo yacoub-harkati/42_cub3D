@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:15:25 by root              #+#    #+#             */
-/*   Updated: 2024/12/30 18:06:43 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:14:05 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,17 @@ size_t	get_width(char **map)
 int	create_rgb(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
+}
+
+void	free_matrix(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
