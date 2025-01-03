@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 23:48:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 22:50:02 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 23:09:21 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,4 +227,10 @@ double			calc_shade(t_ray *ray, char wall_type);
 t_img			*select_texture(t_mlx *mlx, t_ray *ray);
 void			calc_texture_coords(t_ray *ray, t_mlx *mlx, double *wall_x,
 					int *tex_x, char wall_type);
+void			calc_step_dist(t_ray *ray, t_mlx *mlx, int map_x, int map_y);
+void			init_ray(t_ray *ray, t_mlx *mlx, int x);
+void			perform_dda_doors(t_ray *ray, t_mlx *mlx, int *map_x,
+					int *map_y);
+void			calc_wall_height(t_ray *ray, t_mlx *mlx, int map_x, int map_y);
+
 #endif
