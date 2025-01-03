@@ -6,7 +6,7 @@
 #    By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 13:45:21 by root              #+#    #+#              #
-#    Updated: 2025/01/03 23:09:46 by yaharkat         ###   ########.fr        #
+#    Updated: 2025/01/04 00:20:23 by yaharkat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,9 +47,12 @@ SRCS = $(SRC_DIR)/main.c \
        $(SRC_DIR)/game_init.c \
        $(SRC_DIR)/game_cleanup.c \
        $(RAYCAST_DIR)/render.c \
-       $(RAYCAST_DIR)/init_ray_1.c \
-       $(RAYCAST_DIR)/init_ray_2.c \
-       $(RAYCAST_DIR)/init_ray_3.c \
+       $(RAYCAST_DIR)/init_ray.c \
+       $(RAYCAST_DIR)/render_door.c \
+       $(RAYCAST_DIR)/calc.c \
+       $(RAYCAST_DIR)/door_dda.c \
+       $(RAYCAST_DIR)/walls_dda.c \
+       $(RAYCAST_DIR)/cast_rays.c \
        $(RAYCAST_DIR)/draw_map.c
 
 # Object files

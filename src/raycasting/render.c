@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 01:48:58 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 22:31:51 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 00:11:59 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,11 @@ double	calc_shade(t_ray *ray, char wall_type)
 
 static void	draw_texture_line(t_mlx *mlx, t_ray *ray, t_draw_data *data)
 {
-	int	y;
-	int	tex_y;
-	int	color;
-	int	white;
+	int			y;
+	int			tex_y;
+	int			color;
+	static int	white = 255;
 
-	white = 255;
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
@@ -96,10 +95,8 @@ void	draw_walls(t_mlx *mlx, t_ray *ray, int x)
 	t_draw_data	data;
 	double		wall_x;
 
-	// Only draw if we hit something
 	if (ray->hit)
 	{
-		// For doors, only draw them if they're fully closed
 		if (ray->hit_type == 'D'
 			&& mlx->game->textures->door->current_frame > 0)
 			return ;

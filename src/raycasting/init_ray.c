@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:57:31 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 01:58:25 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 00:17:48 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,23 @@ void	init_raycast(t_mlx *mlx)
 {
 	init_north_south(mlx);
 	init_east_west(mlx);
+}
+
+void	init_ray(t_ray *ray, t_mlx *mlx, int x)
+{
+	double camera_x;
+
+	camera_x = 2 * x / (double)WIN_WIDTH - 1;
+	ray->ray_dir_x = mlx->player->dir_x + mlx->player->plane_x * camera_x;
+	ray->ray_dir_y = mlx->player->dir_y + mlx->player->plane_y * camera_x;
+	if (ray->ray_dir_x == 0)
+		ray->delta_dist_x = 1e30;
+	else
+		ray->delta_dist_x = fabs(1.0 / ray->ray_dir_x);
+	if (ray->ray_dir_y == 0)
+		ray->delta_dist_y = 1e30;
+	else
+		ray->delta_dist_y = fabs(1.0 / ray->ray_dir_y);
+	ray->hit = 0;
+	ray->hit_type = '0';
 }
