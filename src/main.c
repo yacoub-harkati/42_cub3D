@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:39:14 by root              #+#    #+#             */
-/*   Updated: 2025/01/03 02:21:45 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:07:05 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ static void	cleanup_mlx(t_mlx *mlx)
 		return ;
 	if (mlx->game)
 		close_window(mlx);
+	if (mlx->game->ptr)
+	{
+		mlx_destroy_display(mlx->game->ptr);
+		free(mlx->game->ptr);
+		mlx->game->ptr = NULL;
+	}
+	free(mlx->game);
+	mlx->game = NULL;
 	if (mlx->map)
 		free(mlx->map);
 	if (mlx->player)

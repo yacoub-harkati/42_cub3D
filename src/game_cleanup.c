@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:34:22 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 02:46:12 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 18:06:21 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,6 @@ int	close_window(t_mlx *mlx)
 			mlx_destroy_window(mlx->game->ptr, mlx->game->win);
 			mlx->game->win = NULL;
 		}
-		if (mlx->game->ptr)
-		{
-			mlx_destroy_display(mlx->game->ptr);
-			free(mlx->game->ptr);
-			mlx->game->ptr = NULL;
-		}
-		free(mlx->game);
-		mlx->game = NULL;
 	}
 	return (0);
 }
