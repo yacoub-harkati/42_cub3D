@@ -28,7 +28,7 @@ static int	win_count(t_xvar *xvar)
 	return (i);
 }
 
-int			mlx_loop_end(t_xvar *xvar) 
+int			mlx_loop_end(t_xvar *xvar)
 {
 	xvar->end_loop = 1;
 	return (1);

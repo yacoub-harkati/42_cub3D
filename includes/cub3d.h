@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 23:48:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 22:12:42 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 22:50:02 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,4 +218,13 @@ size_t			get_width(char **map);
 void			free_matrix(char **str);
 void			*ft_ternary(int condition, void *if_true, void *if_false);
 
+void			draw_doors(t_mlx *mlx, t_ray *ray, int x);
+void			perform_dda_walls(t_ray *ray, t_mlx *mlx, int *map_x,
+					int *map_y);
+void			perform_dda_doors(t_ray *ray, t_mlx *mlx, int *map_x,
+					int *map_y);
+double			calc_shade(t_ray *ray, char wall_type);
+t_img			*select_texture(t_mlx *mlx, t_ray *ray);
+void			calc_texture_coords(t_ray *ray, t_mlx *mlx, double *wall_x,
+					int *tex_x, char wall_type);
 #endif

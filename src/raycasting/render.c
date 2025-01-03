@@ -6,13 +6,13 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 01:48:58 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 21:38:56 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/03 22:31:51 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_img	*select_texture(t_mlx *mlx, t_ray *ray)
+t_img	*select_texture(t_mlx *mlx, t_ray *ray)
 {
 	if (ray->hit_type == 'D')
 		return (mlx->game->textures->door->frames[mlx->game->textures->door->current_frame]);
@@ -23,8 +23,8 @@ static t_img	*select_texture(t_mlx *mlx, t_ray *ray)
 			mlx->game->textures->no));
 }
 
-static void	calc_texture_coords(t_ray *ray, t_mlx *mlx, double *wall_x,
-		int *tex_x, char wall_type)
+void	calc_texture_coords(t_ray *ray, t_mlx *mlx, double *wall_x, int *tex_x,
+		char wall_type)
 {
 	if (ray->side == 0)
 		*wall_x = mlx->player->y + ray->perp_wall_dist * ray->ray_dir_y;
@@ -44,7 +44,7 @@ static void	calc_texture_coords(t_ray *ray, t_mlx *mlx, double *wall_x,
 		*tex_x = TEXTURE_SIZE - *tex_x - 1;
 }
 
-static double	calc_shade(t_ray *ray, char wall_type)
+double	calc_shade(t_ray *ray, char wall_type)
 {
 	double	shade;
 
@@ -96,12 +96,20 @@ void	draw_walls(t_mlx *mlx, t_ray *ray, int x)
 	t_draw_data	data;
 	double		wall_x;
 
-	data.texture = select_texture(mlx, ray);
-	calc_texture_coords(ray, mlx, &wall_x, &data.tex_x, ray->hit_type);
-	data.shade = calc_shade(ray, ray->hit_type);
-	data.step = 1.0 * TEXTURE_SIZE / ray->line_height;
-	data.tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2)
-		* data.step;
-	data.x = x;
-	draw_texture_line(mlx, ray, &data);
+	// Only draw if we hit something
+	if (ray->hit)
+	{
+		// For doors, only draw them if they're fully closed
+		if (ray->hit_type == 'D'
+			&& mlx->game->textures->door->current_frame > 0)
+			return ;
+		data.texture = select_texture(mlx, ray);
+		calc_texture_coords(ray, mlx, &wall_x, &data.tex_x, ray->hit_type);
+		data.shade = calc_shade(ray, ray->hit_type);
+		data.step = 1.0 * TEXTURE_SIZE / ray->line_height;
+		data.tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2)
+			* data.step;
+		data.x = x;
+		draw_texture_line(mlx, ray, &data);
+	}
 }
