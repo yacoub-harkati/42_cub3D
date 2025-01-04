@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 23:48:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 03:21:44 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 03:24:08 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 # define TEXTURE_SIZE 64
 # define PI 3.14159265359
-# define MOVE_SPEED 0.05
+# define MOVE_SPEED 0.07
 # define ROT_SPEED 0.03
 
 # define KEY_ESC 65307
