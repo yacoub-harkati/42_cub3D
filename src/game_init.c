@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:34:47 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 19:46:59 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 02:38:28 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ static int	init_screen(t_mlx *mlx)
 	return (1);
 }
 
+static void	init_hooks(t_mlx *mlx)
+{
+	mlx_loop_hook(mlx->game->ptr, game_loop, mlx);
+	mlx_hook(mlx->game->win, 2, 1L << 0, handle_keypress, mlx);
+	mlx_hook(mlx->game->win, 17, 1L << 17, close_window, mlx);
+	mlx_hook(mlx->game->win, 6, 1L << 6, handle_mouse_move, mlx);
+}
+
 int	init_game(t_mlx *mlx)
 {
 	if (!mlx || !mlx->map || !mlx->player)
@@ -92,10 +100,7 @@ int	init_game(t_mlx *mlx)
 		return (err("Texture initialization failed"), close_window(mlx), 1);
 	mlx->game->running = 1;
 	init_raycast(mlx);
-	mlx_loop_hook(mlx->game->ptr, game_loop, mlx);
-	mlx_hook(mlx->game->win, 2, 1L << 0, handle_keypress, mlx);
-	mlx_hook(mlx->game->win, 17, 1L << 17, close_window, mlx);
-	mlx_hook(mlx->game->win, 6, 1L << 6, handle_mouse_move, mlx);
+	init_hooks(mlx);
 	mlx_mouse_hide(mlx->game->ptr, mlx->game->win);
 	mlx_mouse_move(mlx->game->ptr, mlx->game->win, WIN_WIDTH / 2, WIN_HEIGHT
 		/ 2);

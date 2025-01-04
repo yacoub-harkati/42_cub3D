@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 02:49:46 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 03:27:21 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 02:36:15 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	handle_mouse_move(int x, int y, t_mlx *mlx)
 	double		rotation;
 	int			dx;
 
-	(void)y;
 	if (!mlx->game->running)
 		return (0);
 	if (last_x == -1)
@@ -39,16 +38,16 @@ int	handle_mouse_move(int x, int y, t_mlx *mlx)
 			/ 2);
 		last_x = WIN_WIDTH / 2;
 	}
-	return (0);
+	return ((void)y, 0);
 }
 
 /* Update rotate_camera for smoother rotation */
 void	rotate_camera(t_mlx *mlx, double rotation)
 {
-	double old_dir_x;
-	double old_plane_x;
-	double cos_rot;
-	double sin_rot;
+	double	old_dir_x;
+	double	old_plane_x;
+	double	cos_rot;
+	double	sin_rot;
 
 	cos_rot = cos(rotation);
 	sin_rot = sin(rotation);

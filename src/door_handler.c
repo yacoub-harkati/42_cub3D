@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:42:54 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/03 21:21:11 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 02:42:42 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	update_door_animation(t_door_anim *door)
 		}
 	}
 }
-
+// norminette to do
 static int	is_near_door(t_mlx *mlx, int *door_x, int *door_y)
 {
 	int		check_x;
@@ -163,24 +163,20 @@ static int	is_near_door(t_mlx *mlx, int *door_x, int *door_y)
 
 void	handle_door_interaction(t_mlx *mlx)
 {
-	int door_x;
-	int door_y;
+	int	door_x;
+	int	door_y;
 
 	if (!mlx->game->textures->door)
 		return ;
-
 	if (is_near_door(mlx, &door_x, &door_y))
 	{
-		// If door is not already animating
 		if (!mlx->game->textures->door->is_animating)
 		{
-			// If door is closed (frame 0), open it
 			if (mlx->game->textures->door->current_frame == 0)
 			{
 				mlx->game->textures->door->is_animating = 1;
 				mlx->game->textures->door->animation_dir = 1;
 			}
-			// If door is open (last frame), close it
 			else if (mlx->game->textures->door->current_frame == DOOR_FRAMES
 				- 1)
 			{

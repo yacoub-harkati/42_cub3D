@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:39:14 by root              #+#    #+#             */
-/*   Updated: 2025/01/03 18:07:05 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 02:35:09 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void	cleanup_mlx(t_mlx *mlx)
 
 int	main(int ac, char **av)
 {
-	t_mlx *mlx;
-	int status;
+	t_mlx	*mlx;
+	int		status;
 
 	if (check_args(ac, av))
 		return (1);
