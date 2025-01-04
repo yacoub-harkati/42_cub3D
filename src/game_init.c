@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:34:47 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 02:38:28 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 18:01:55 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static int	init_textures(t_mlx *mlx)
 	mlx->game->textures = ft_calloc(1, sizeof(t_textures));
 	if (!mlx->game->textures)
 		return (0);
-	mlx->game->textures->no = init_texture(mlx->game->ptr, mlx->path->NO);
-	mlx->game->textures->so = init_texture(mlx->game->ptr, mlx->path->SO);
-	mlx->game->textures->ea = init_texture(mlx->game->ptr, mlx->path->EA);
-	mlx->game->textures->we = init_texture(mlx->game->ptr, mlx->path->WE);
+	mlx->game->textures->no = init_texture(mlx->game->ptr, mlx->path->no);
+	mlx->game->textures->so = init_texture(mlx->game->ptr, mlx->path->so);
+	mlx->game->textures->ea = init_texture(mlx->game->ptr, mlx->path->ea);
+	mlx->game->textures->we = init_texture(mlx->game->ptr, mlx->path->we);
 	mlx->game->textures->door = init_door_animation(mlx->game->ptr);
 	if (!mlx->game->textures->no || !mlx->game->textures->so
 		|| !mlx->game->textures->ea || !mlx->game->textures->we

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:45:13 by root              #+#    #+#             */
-/*   Updated: 2024/12/29 23:29:02 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 21:38:52 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,32 @@ t_mlx	*init_struct(int ac, char **av)
 	if (!mlx->game)
 		return (err("Error\n"), NULL);
 	return (mlx);
+}
+
+t_pos	*init_pos(char **file)
+{
+	int		i;
+	t_pos	*position;
+
+	i = 0;
+	position = malloc(sizeof(t_pos));
+	if (!position)
+		return (NULL);
+	while (file[i])
+	{
+		if (ft_strnstr(file[i], "NO", ft_strlen(file[i])))
+			position->no = i;
+		else if (ft_strnstr(file[i], "SO", ft_strlen(file[i])))
+			position->so = i;
+		else if (ft_strnstr(file[i], "WE", ft_strlen(file[i])))
+			position->we = i;
+		else if (ft_strnstr(file[i], "EA", ft_strlen(file[i])))
+			position->ea = i;
+		else if (ft_strnstr(file[i], "F", ft_strlen(file[i])))
+			position->f = i;
+		else if (ft_strnstr(file[i], "C", ft_strlen(file[i])))
+			position->c = i;
+		i++;
+	}
+	return (position);
 }

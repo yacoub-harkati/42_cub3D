@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   parse_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:49:08 by root              #+#    #+#             */
-/*   Updated: 2024/12/30 23:55:09 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 21:49:47 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	get_count(t_map *map)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] != '1' && map->map[i][j] != '0'
+				&& map->map[i][j] != 'N' && map->map[i][j] != 'S'
+				&& map->map[i][j] != 'W' && map->map[i][j] != 'E'
+				&& map->map[i][j] != ' ' && map->map[i][j] != '\t'
+				&& map->map[i][j] != 'D')
+				return (-1);
+			if (map->map[i][j] == 'N' || map->map[i][j] == 'S'
+			|| map->map[i][j] == 'W' || map->map[i][j] == 'E')
+				count++;
+			j++;
+		}
+		i++;
+	}
+	return (count);
+}
 
 t_player	*get_player_info(char **map)
 {
@@ -23,25 +52,15 @@ t_player	*get_player_info(char **map)
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (err("Error\n"), NULL);
-	player->x = 0;
-	player->y = 0;
-	player->dir_x = 0;
-	player->dir_y = 0;
-	player->plane_x = 0;
-	player->plane_y = 0;
-	player->position = '\0';
+	init_player(player);
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-			if ((c = ft_strchr("NSWE", map[i][j])))
-			{
-				player->x = (double)j + 0.5;
-				player->y = (double)i + 0.5;
-				player->position = c[0];
-				return (player);
-			}
+			c = ft_strchr("NSWE", map[i][j]);
+			if (c)
+				return (get_position(player, c, i, j), player);
 			j++;
 		}
 		i++;
@@ -51,27 +70,15 @@ t_player	*get_player_info(char **map)
 
 t_map	*parse_map(char **file)
 {
-	int		i;
 	int		map_start;
 	t_map	*map;
 
-	i = 0;
 	map = malloc(sizeof(t_map));
-	map->height = 0;
-	map->width = 0;
-	map_start = -1;
 	if (!map)
 		return (err("Error\n"), NULL);
-	while (file[i])
-	{
-		if (is_map_line(file[i]))
-		{
-			if (map_start == -1)
-				map_start = i;
-			map->height++;
-		}
-		i++;
-	}
+	map->height = 0;
+	map->width = 0;
+	map_start = get_map_start(file, map);
 	map->map = malloc(sizeof(char *) * (map->height + 1));
 	if (!map->map)
 		return (err("Error\n"), NULL);

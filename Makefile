@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+         #
+#    By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 13:45:21 by root              #+#    #+#              #
-#    Updated: 2025/01/04 02:49:46 by yaharkat         ###   ########.fr        #
+#    Updated: 2025/01/04 22:03:27 by rzarhoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,13 +36,17 @@ RAYCAST_DIR = $(SRC_DIR)/raycasting
 SRCS = $(SRC_DIR)/main.c \
        $(UTILS_DIR)/check_args.c \
        $(UTILS_DIR)/error.c \
-       $(UTILS_DIR)/utils.c \
+       $(UTILS_DIR)/utils1.c \
+       $(UTILS_DIR)/utils2.c \
        $(UTILS_DIR)/logic.c \
        $(UTILS_DIR)/raycasting_utils.c \
        $(SRC_DIR)/init_struct.c \
        $(SRC_DIR)/door_handler.c \
        $(SRC_DIR)/parse_data.c \
-       $(SRC_DIR)/check_data.c \
+       $(SRC_DIR)/check_file.c \
+       $(SRC_DIR)/check_map.c \
+       $(SRC_DIR)/check_walls.c \
+       $(SRC_DIR)/check_utils.c \
        $(SRC_DIR)/game_loop.c \
        $(SRC_DIR)/player_move.c \
        $(SRC_DIR)/mouse_control.c \

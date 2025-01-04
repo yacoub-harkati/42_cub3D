@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 23:48:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 03:24:08 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 22:04:15 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@
 # define DOOR_RANGE 2.0
 # define COLOR_TO_REPLACE 16711890
 # define TRANSPARENT_COLOR 16515796
+
+typedef struct s_pos
+{
+	int	no;
+	int	so;
+	int	we;
+	int	ea;
+	int	f;
+	int	c;
+}	t_pos;
 
 typedef struct s_img
 {
@@ -128,10 +138,10 @@ typedef struct s_minimap
 
 typedef struct s_path
 {
-	char		*NO;
-	char		*SO;
-	char		*WE;
-	char		*EA;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
 }				t_path;
 
 typedef struct s_map
@@ -176,17 +186,30 @@ typedef struct s_mlx
 t_mlx			*init_struct(int ac, char **av);
 int				init_game(t_mlx *mlx);
 void			init_raycast(t_mlx *mlx);
+t_pos			*init_pos(char **file);
+void			init_player(t_player *player);
+void			get_position(t_player *player, char *c, int i, int j);
+int				get_map_start(char **file, t_map *map);
 
 char			**parse_file(char **av);
 t_map			*parse_map(char **file);
 void			get_map(char **file, t_map *map, int index);
 void			get_file(char *file, char **map);
+char			*get_path(char **file, char *str);
+int				get_count(t_map *map);
 
 int				check_args(int ac, char **av);
 int				check_file(t_mlx *mlx);
 int				check_map(t_map *map);
+int				check_rgb(t_mlx *mlx);
+int				check_path_file(t_path *path);
+int				check_fc(t_mlx *mlx);
+int				check_map_walls1(t_map *map);
+int				check_map_walls2(t_map *map);
+int				wall_check(t_map *map, int i, int j);
 int				is_map_line(char *line);
 int				count_lines(char *av);
+int				*convert_char_int(char **str);
 
 t_player		*get_player_info(char **map);
 void			move_player(t_mlx *mlx, int key);
