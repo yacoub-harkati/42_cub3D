@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 00:15:02 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 00:21:07 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 03:18:46 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	init_ray_vars(t_ray *ray, t_mlx *mlx, int x, int *coords)
 	calc_step_dist(ray, mlx, coords[0], coords[1]);
 }
 
-static void	render_walls(t_mlx *mlx)
+static void	render_walls(t_mlx *mlx, double *z_buffer)
 {
 	t_ray	ray;
 	int		x;
@@ -33,11 +33,12 @@ static void	render_walls(t_mlx *mlx)
 		perform_dda_walls(&ray, mlx, &coords[0], &coords[1]);
 		calc_wall_height(&ray, mlx, coords[0], coords[1]);
 		draw_walls(mlx, &ray, x);
+		z_buffer[x] = ray.perp_wall_dist;
 		x++;
 	}
 }
 
-static void	render_doors(t_mlx *mlx)
+static void	render_doors(t_mlx *mlx, double *z_buffer)
 {
 	t_ray	ray;
 	int		x;
@@ -51,7 +52,8 @@ static void	render_doors(t_mlx *mlx)
 		if (ray.hit && ray.hit_type == 'D')
 		{
 			calc_wall_height(&ray, mlx, coords[0], coords[1]);
-			draw_doors(mlx, &ray, x);
+			if (ray.perp_wall_dist < z_buffer[x])
+				draw_doors(mlx, &ray, x);
 		}
 		x++;
 	}
@@ -59,9 +61,15 @@ static void	render_doors(t_mlx *mlx)
 
 void	cast_rays(t_mlx *mlx)
 {
+	static double	*z_buffer = NULL;
+
+	if (!z_buffer)
+		z_buffer = malloc(sizeof(double) * WIN_WIDTH);
+	if (!z_buffer)
+		return ;
 	if (!mlx || !mlx->player || !mlx->map || !mlx->game || !mlx->game->screen
 		|| !mlx->game->screen->addr)
 		return ;
-	render_walls(mlx);
-	render_doors(mlx);
+	render_walls(mlx, z_buffer);
+	render_doors(mlx, z_buffer);
 }
