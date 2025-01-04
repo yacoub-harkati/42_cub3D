@@ -6,7 +6,7 @@
 #    By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 13:45:21 by root              #+#    #+#              #
-#    Updated: 2025/01/04 02:33:12 by yaharkat         ###   ########.fr        #
+#    Updated: 2025/01/04 02:49:46 by yaharkat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,9 @@ SRCS = $(SRC_DIR)/main.c \
        $(SRC_DIR)/parse_data.c \
        $(SRC_DIR)/check_data.c \
        $(SRC_DIR)/game_loop.c \
-	   $(SRC_DIR)/player_move.c \
-	   $(SRC_DIR)/mouse_control.c \
+       $(SRC_DIR)/player_move.c \
+       $(SRC_DIR)/mouse_control.c \
+       $(SRC_DIR)/door_utils.c \
        $(SRC_DIR)/game_init.c \
        $(SRC_DIR)/game_cleanup.c \
        $(RAYCAST_DIR)/render.c \

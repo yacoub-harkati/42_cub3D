@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:42:54 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 02:42:42 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 02:49:23 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,71 +118,6 @@ void	update_door_animation(t_door_anim *door)
 		{
 			door->current_frame = 0;
 			door->is_animating = 0;
-		}
-	}
-}
-// norminette to do
-static int	is_near_door(t_mlx *mlx, int *door_x, int *door_y)
-{
-	int		check_x;
-	int		check_y;
-	double	player_x;
-	double	player_y;
-	double	check_dist;
-
-	player_x = mlx->player->x;
-	player_y = mlx->player->y;
-	// Check in a small radius around the player
-	for (check_y = (int)(player_y - DOOR_RANGE); check_y <= (int)(player_y
-			+ DOOR_RANGE); check_y++)
-	{
-		for (check_x = (int)(player_x - DOOR_RANGE); check_x <= (int)(player_x
-				+ DOOR_RANGE); check_x++)
-		{
-			// Check map bounds
-			if (check_y < 0 || check_y >= mlx->map->height || check_x < 0
-				|| check_x >= mlx->map->width)
-				continue ;
-			// Check if there's a door
-			if (mlx->map->map[check_y][check_x] == 'D')
-			{
-				// Calculate exact distance
-				check_dist = sqrt(pow(player_x - check_x, 2) + pow(player_y
-							- check_y, 2));
-				if (check_dist <= DOOR_RANGE)
-				{
-					*door_x = check_x;
-					*door_y = check_y;
-					return (1);
-				}
-			}
-		}
-	}
-	return (0);
-}
-
-void	handle_door_interaction(t_mlx *mlx)
-{
-	int	door_x;
-	int	door_y;
-
-	if (!mlx->game->textures->door)
-		return ;
-	if (is_near_door(mlx, &door_x, &door_y))
-	{
-		if (!mlx->game->textures->door->is_animating)
-		{
-			if (mlx->game->textures->door->current_frame == 0)
-			{
-				mlx->game->textures->door->is_animating = 1;
-				mlx->game->textures->door->animation_dir = 1;
-			}
-			else if (mlx->game->textures->door->current_frame == DOOR_FRAMES
-				- 1)
-			{
-				mlx->game->textures->door->is_animating = 1;
-				mlx->game->textures->door->animation_dir = -1;
-			}
 		}
 	}
 }
