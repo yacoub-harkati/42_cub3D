@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 02:48:53 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 02:49:26 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 02:52:50 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,12 @@ static int	check_door_at_position(t_mlx *mlx, double px, double py,
 		{
 			if (is_valid_map_position(mlx, check_x, check_y))
 			{
-				if (mlx->map->map[check_y][check_x] == 'D')
+				if (mlx->map->map[check_y][check_x] == 'D'
+					&& check_door_distance(px, py, check_x, check_y))
 				{
-					if (check_door_distance(px, py, check_x, check_y))
-					{
-						door_coords[0] = check_x;
-						door_coords[1] = check_y;
-						return (1);
-					}
+					door_coords[0] = check_x;
+					door_coords[1] = check_y;
+					return (1);
 				}
 			}
 			check_x++;
@@ -77,8 +75,8 @@ static int	is_near_door(t_mlx *mlx, int *door_x, int *door_y)
 
 void	handle_door_interaction(t_mlx *mlx)
 {
-	int door_x;
-	int door_y;
+	int	door_x;
+	int	door_y;
 
 	if (!mlx->game->textures->door)
 		return ;

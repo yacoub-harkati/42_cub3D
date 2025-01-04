@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:42:54 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 02:49:23 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 02:56:59 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,11 @@ static char	*get_frame_path(int frame_num)
 	if (!base_path)
 		return (NULL);
 	frame_str = ft_itoa(frame_num);
-	if (!frame_str)
-	{
-		free(base_path);
-		return (NULL);
-	}
 	temp = ft_strdup(base_path);
 	free(base_path);
-	if (!temp)
-	{
-		free(frame_str);
-		return (NULL);
-	}
 	result = ft_strjoin(temp, frame_str);
 	free(temp);
 	free(frame_str);
-	if (!result)
-		return (NULL);
 	temp = ft_strjoin(result, ".xpm");
 	free(result);
 	return (temp);
@@ -49,29 +37,19 @@ t_door_anim	*init_door_animation(void *mlx_ptr)
 {
 	t_door_anim	*door;
 	char		*frame_path;
-	int			i;
+	static int	i = 0;
 
 	door = ft_calloc(1, sizeof(t_door_anim));
-	if (!door)
-		return (NULL);
-	i = 0;
 	while (i < DOOR_FRAMES)
 	{
 		frame_path = get_frame_path(i);
 		if (!frame_path)
-		{
-			cleanup_door_frames(mlx_ptr, door);
-			return (NULL);
-		}
+			return (cleanup_door_frames(mlx_ptr, door), NULL);
 		door->frames[i] = init_texture(mlx_ptr, frame_path);
 		free(frame_path);
 		if (!door->frames[i])
-		{
-			cleanup_door_frames(mlx_ptr, door);
-			return (NULL);
-		}
-		make_color_transparent(door->frames[i]);
-		i++;
+			return (cleanup_door_frames(mlx_ptr, door), NULL);
+		make_color_transparent(door->frames[i++]);
 	}
 	door->current_frame = 0;
 	door->frame_counter = 0;
