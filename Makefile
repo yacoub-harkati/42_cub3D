@@ -6,7 +6,7 @@
 #    By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 13:45:21 by root              #+#    #+#              #
-#    Updated: 2025/01/04 00:30:06 by yaharkat         ###   ########.fr        #
+#    Updated: 2025/01/04 02:33:12 by yaharkat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ SRCS = $(SRC_DIR)/main.c \
        $(UTILS_DIR)/check_args.c \
        $(UTILS_DIR)/error.c \
        $(UTILS_DIR)/utils.c \
+       $(UTILS_DIR)/logic.c \
+       $(UTILS_DIR)/raycasting_utils.c \
        $(SRC_DIR)/init_struct.c \
        $(SRC_DIR)/door_handler.c \
        $(SRC_DIR)/parse_data.c \
