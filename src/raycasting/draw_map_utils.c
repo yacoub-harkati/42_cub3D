@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 00:28:42 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 02:23:59 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 03:33:36 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	get_tile_color(t_mlx *mlx, int x, int y)
 		return (0x808080);
 	if (mlx->map->map[y][x] == '0' || ft_strchr("NSWE", mlx->map->map[y][x]))
 		return (0x202020);
+	if (mlx->map->map[y][x] == 'D')
+		return (0x00FF00);
 	return (0x000000);
 }
 
