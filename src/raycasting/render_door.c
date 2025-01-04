@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:57:31 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 00:19:22 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 02:28:19 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 static void	init_door_data(t_draw_data *data, t_mlx *mlx, t_ray *ray, int x)
 {
-	double	wall_x;
-
 	data->texture = select_texture(mlx, ray);
-	calc_texture_coords(ray, mlx, &wall_x, &data->tex_x, ray->hit_type);
+	calc_texture_coords(ray, mlx, &data->tex_x, ray->hit_type);
 	data->shade = calc_shade(ray, ray->hit_type);
 	data->step = 1.0 * TEXTURE_SIZE / ray->line_height;
 	data->tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2)

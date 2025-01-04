@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 00:28:42 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 00:29:17 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 02:23:59 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	get_tile_color(t_mlx *mlx, int x, int y)
 
 void	draw_map_tile(t_mlx *mlx, t_minimap *mm, int x, int y)
 {
-	int i;
-	int j;
-	int color;
+	int	i;
+	int	j;
+	int	color;
 
 	color = get_tile_color(mlx, x, y);
 	i = 1;

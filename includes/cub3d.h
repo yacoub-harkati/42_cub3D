@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 23:48:16 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 00:29:43 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 02:27:20 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,8 +225,8 @@ void			perform_dda_doors(t_ray *ray, t_mlx *mlx, int *map_x,
 					int *map_y);
 double			calc_shade(t_ray *ray, char wall_type);
 t_img			*select_texture(t_mlx *mlx, t_ray *ray);
-void			calc_texture_coords(t_ray *ray, t_mlx *mlx, double *wall_x,
-					int *tex_x, char wall_type);
+double			calc_texture_coords(t_ray *ray, t_mlx *mlx, int *tex_x,
+					char wall_type);
 void			calc_step_dist(t_ray *ray, t_mlx *mlx, int map_x, int map_y);
 void			init_ray(t_ray *ray, t_mlx *mlx, int x);
 void			perform_dda_doors(t_ray *ray, t_mlx *mlx, int *map_x,

@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:57:31 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 00:21:18 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 02:24:03 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	init_raycast(t_mlx *mlx)
 
 void	init_ray(t_ray *ray, t_mlx *mlx, int x)
 {
-	double camera_x;
+	double	camera_x;
 
 	camera_x = 2 * x / (double)WIN_WIDTH - 1;
 	ray->ray_dir_x = mlx->player->dir_x + mlx->player->plane_x * camera_x;

@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 01:48:58 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 00:11:59 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 02:27:54 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 t_img	*select_texture(t_mlx *mlx, t_ray *ray)
 {
+	int	current_frame;
+
+	current_frame = mlx->game->textures->door->current_frame;
 	if (ray->hit_type == 'D')
-		return (mlx->game->textures->door->frames[mlx->game->textures->door->current_frame]);
+		return (mlx->game->textures->door->frames[current_frame]);
 	if (ray->side == 0)
 		return (ft_ternary(ray->ray_dir_x > 0, mlx->game->textures->ea,
 				mlx->game->textures->we));
@@ -23,18 +26,18 @@ t_img	*select_texture(t_mlx *mlx, t_ray *ray)
 			mlx->game->textures->no));
 }
 
-void	calc_texture_coords(t_ray *ray, t_mlx *mlx, double *wall_x, int *tex_x,
-		char wall_type)
+double	calc_texture_coords(t_ray *ray, t_mlx *mlx, int *tex_x, char wall_type)
 {
+	double	wall_x;
+
 	if (ray->side == 0)
-		*wall_x = mlx->player->y + ray->perp_wall_dist * ray->ray_dir_y;
+		wall_x = mlx->player->y + ray->perp_wall_dist * ray->ray_dir_y;
 	else
-		*wall_x = mlx->player->x + ray->perp_wall_dist * ray->ray_dir_x;
-	*wall_x -= floor(*wall_x);
-	*tex_x = (int)(*wall_x * TEXTURE_SIZE);
+		wall_x = mlx->player->x + ray->perp_wall_dist * ray->ray_dir_x;
+	wall_x -= floor(wall_x);
+	*tex_x = (int)(wall_x * TEXTURE_SIZE);
 	if (wall_type == 'D')
 	{
-		/* Make doors look consistent regardless of side hit */
 		if ((ray->side == 0 && ray->ray_dir_x < 0) || (ray->side == 1
 				&& ray->ray_dir_y < 0))
 			*tex_x = TEXTURE_SIZE - *tex_x - 1;
@@ -42,6 +45,7 @@ void	calc_texture_coords(t_ray *ray, t_mlx *mlx, double *wall_x, int *tex_x,
 	else if ((ray->side == 0 && ray->ray_dir_x > 0) || (ray->side == 1
 			&& ray->ray_dir_y < 0))
 		*tex_x = TEXTURE_SIZE - *tex_x - 1;
+	return (wall_x);
 }
 
 double	calc_shade(t_ray *ray, char wall_type)
@@ -93,7 +97,6 @@ static void	draw_texture_line(t_mlx *mlx, t_ray *ray, t_draw_data *data)
 void	draw_walls(t_mlx *mlx, t_ray *ray, int x)
 {
 	t_draw_data	data;
-	double		wall_x;
 
 	if (ray->hit)
 	{
@@ -101,7 +104,7 @@ void	draw_walls(t_mlx *mlx, t_ray *ray, int x)
 			&& mlx->game->textures->door->current_frame > 0)
 			return ;
 		data.texture = select_texture(mlx, ray);
-		calc_texture_coords(ray, mlx, &wall_x, &data.tex_x, ray->hit_type);
+		calc_texture_coords(ray, mlx, &data.tex_x, ray->hit_type);
 		data.shade = calc_shade(ray, ray->hit_type);
 		data.step = 1.0 * TEXTURE_SIZE / ray->line_height;
 		data.tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2)

@@ -6,13 +6,11 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 00:26:56 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 00:29:06 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/04 02:23:54 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
 
 static void	draw_map_tiles(t_mlx *mlx, t_minimap *mm)
 {
@@ -74,7 +72,7 @@ static void	draw_direction_line(t_mlx *mlx, t_minimap *mm)
 
 void	draw_minimap(t_mlx *mlx)
 {
-	t_minimap mm;
+	t_minimap	mm;
 
 	mm.tile_size = 8;
 	mm.mini_x = 10;
