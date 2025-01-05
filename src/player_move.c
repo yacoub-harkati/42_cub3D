@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 02:24:29 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 03:01:43 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/05 20:59:10 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ void	move_player(t_mlx *mlx, int key)
 	new_x = mlx->player->x;
 	new_y = mlx->player->y;
 	handle_movement(mlx, &new_x, &new_y, key);
-	if (can_move_to(mlx, new_x, new_y))
+	if (can_move_to(mlx, new_x, new_y) && can_move_to(mlx, new_x + 0.3, new_y)
+		&& can_move_to(mlx, new_x, new_y + 0.3)
+		&& can_move_to(mlx, new_x + 0.3, new_y + 0.3))
 	{
 		mlx->player->x = new_x;
 		mlx->player->y = new_y;
