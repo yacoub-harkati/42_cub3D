@@ -6,11 +6,20 @@
 /*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:39:14 by root              #+#    #+#             */
-/*   Updated: 2025/01/05 21:04:59 by rzarhoun         ###   ########.fr       */
+/*   Updated: 2025/01/05 21:20:46 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	free_path(t_path *path)
+{
+	free(path->so);
+	free(path->we);
+	free(path->ea);
+	free(path->no);
+	free(path);
+}
 
 static void	cleanup_mlx(t_mlx *mlx)
 {
@@ -27,30 +36,13 @@ static void	cleanup_mlx(t_mlx *mlx)
 	free(mlx->game);
 	mlx->game = NULL;
 	if (mlx->file)
-	{
-		int i = 0;
-		while (mlx->file[i])
-			free(mlx->file[i++]);
-		free(mlx->file);
-	}
+		free_matrix(mlx->file);
 	if (mlx->map)
-	{
-		int i = 0;
-		while (mlx->map->map[i])
-			free(mlx->map->map[i++]);
-		free(mlx->map->map);
-		free(mlx->map);
-	}
+		(free_matrix(mlx->map->map), free(mlx->map));
 	if (mlx->player)
 		free(mlx->player);
 	if (mlx->path)
-	{
-		free(mlx->path->so);
-		free(mlx->path->we);
-		free(mlx->path->ea);
-		free(mlx->path->no);
-		free(mlx->path);
-	}
+		free_path(mlx->path);
 	if (mlx->floor)
 		free(mlx->floor);
 	if (mlx->ceiling)

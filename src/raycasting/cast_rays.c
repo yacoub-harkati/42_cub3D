@@ -6,7 +6,7 @@
 /*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 00:15:02 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/05 21:12:42 by rzarhoun         ###   ########.fr       */
+/*   Updated: 2025/01/05 21:17:41 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ static void	render_doors(t_mlx *mlx, double *z_buffer)
 
 void	cast_rays(t_mlx *mlx)
 {
-	double	*z_buffer = NULL;
+	double	*z_buffer;
 
+	z_buffer = NULL;
 	if (!z_buffer)
 		z_buffer = malloc(sizeof(double) * WIN_WIDTH);
 	if (!z_buffer)
