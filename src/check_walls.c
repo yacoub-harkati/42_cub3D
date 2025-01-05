@@ -6,7 +6,7 @@
 /*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 22:00:24 by rzarhoun          #+#    #+#             */
-/*   Updated: 2025/01/05 21:52:27 by rzarhoun         ###   ########.fr       */
+/*   Updated: 2025/01/05 22:08:17 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,11 @@ int	check_map_walls2(t_map *map)
 					return (1);
 			}
 			if (map->map[i][j + 1] == '\0' &&
-				((i > 0 && map->map[i - 1][j + 1] == '0') ||
-				(i < map->height - 1 && map->map[i + 1][j + 1] == '0')))
-				return (err("Error\nMap should be surrounded by walls\n"),
-					1);
+				((i > 0 && (size_t)j + 1 < ft_strlen(map->map[i - 1])
+				&& map->map[i - 1][j + 1] == '0') || (i < map->height - 1 &&
+				(size_t)j + 1 < ft_strlen(map->map[i + 1]) &&
+				map->map[i + 1][j + 1] && map->map[i + 1][j + 1] == '0')))
+				return (err("Error\nMap should be surrounded by walls\n"), 1);
 			j++;
 		}
 		i++;
