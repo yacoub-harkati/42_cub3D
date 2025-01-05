@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 01:34:47 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 18:01:55 by rzarhoun         ###   ########.fr       */
+/*   Updated: 2025/01/05 21:53:04 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int	init_game(t_mlx *mlx)
 	mlx->game->running = 1;
 	init_raycast(mlx);
 	init_hooks(mlx);
-	mlx_mouse_hide(mlx->game->ptr, mlx->game->win);
 	mlx_mouse_move(mlx->game->ptr, mlx->game->win, WIN_WIDTH / 2, WIN_HEIGHT
 		/ 2);
 	mlx_loop(mlx->game->ptr);
