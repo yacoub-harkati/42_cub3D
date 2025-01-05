@@ -6,7 +6,7 @@
 /*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:45:13 by root              #+#    #+#             */
-/*   Updated: 2025/01/04 21:38:52 by rzarhoun         ###   ########.fr       */
+/*   Updated: 2025/01/05 21:15:11 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ t_mlx	*init_struct(int ac, char **av)
 	mlx->player = get_player_info(mlx->map->map);
 	if (!mlx->player)
 		return (NULL);
-	mlx->game = malloc(sizeof(t_game));
-	if (!mlx->game)
-		return (err("Error\n"), NULL);
 	return (mlx);
 }
 

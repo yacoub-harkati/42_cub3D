@@ -6,7 +6,7 @@
 /*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:41:41 by rzarhoun          #+#    #+#             */
-/*   Updated: 2025/01/04 21:27:46 by rzarhoun         ###   ########.fr       */
+/*   Updated: 2025/01/05 20:51:15 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,14 @@ int	check_fc(t_mlx *mlx)
 {
 	char	**floor;
 	char	**ceiling;
+	char	*path;
 
-	floor = ft_split(get_path(mlx->file, "F"), ',');
-	ceiling = ft_split(get_path(mlx->file, "C"), ',');
+	path = get_path(mlx->file, "F");
+	floor = ft_split(path, ',');
+	free(path);
+	path = get_path(mlx->file, "C");
+	ceiling = ft_split(path, ',');
+	free(path);
 	if (!floor)
 		return (err("Error\nFloor color is missing\n"), 1);
 	if (!ceiling)

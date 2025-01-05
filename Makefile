@@ -6,7 +6,7 @@
 #    By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 13:45:21 by root              #+#    #+#              #
-#    Updated: 2025/01/04 22:03:27 by rzarhoun         ###   ########.fr        #
+#    Updated: 2025/01/05 20:46:15 by rzarhoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = cub3D
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 -ffast-math
+CFLAGS = -Wall -Wextra -Werror -O3 -ffast-math -g3
 SANITIZE = -fsanitize=address -g3
 
 # Libraries

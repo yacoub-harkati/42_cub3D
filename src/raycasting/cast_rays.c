@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 00:15:02 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 03:18:46 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/05 21:12:42 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	render_doors(t_mlx *mlx, double *z_buffer)
 
 void	cast_rays(t_mlx *mlx)
 {
-	static double	*z_buffer = NULL;
+	double	*z_buffer = NULL;
 
 	if (!z_buffer)
 		z_buffer = malloc(sizeof(double) * WIN_WIDTH);
@@ -72,4 +72,5 @@ void	cast_rays(t_mlx *mlx)
 		return ;
 	render_walls(mlx, z_buffer);
 	render_doors(mlx, z_buffer);
+	free(z_buffer);
 }

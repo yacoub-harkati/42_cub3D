@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:39:14 by root              #+#    #+#             */
-/*   Updated: 2025/01/04 02:35:09 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/05 21:04:59 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,35 @@ static void	cleanup_mlx(t_mlx *mlx)
 	}
 	free(mlx->game);
 	mlx->game = NULL;
+	if (mlx->file)
+	{
+		int i = 0;
+		while (mlx->file[i])
+			free(mlx->file[i++]);
+		free(mlx->file);
+	}
 	if (mlx->map)
+	{
+		int i = 0;
+		while (mlx->map->map[i])
+			free(mlx->map->map[i++]);
+		free(mlx->map->map);
 		free(mlx->map);
+	}
 	if (mlx->player)
 		free(mlx->player);
 	if (mlx->path)
+	{
+		free(mlx->path->so);
+		free(mlx->path->we);
+		free(mlx->path->ea);
+		free(mlx->path->no);
 		free(mlx->path);
+	}
+	if (mlx->floor)
+		free(mlx->floor);
+	if (mlx->ceiling)
+		free(mlx->ceiling);
 	free(mlx);
 }
 

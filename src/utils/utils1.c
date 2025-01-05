@@ -6,7 +6,7 @@
 /*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:15:25 by root              #+#    #+#             */
-/*   Updated: 2025/01/04 21:53:12 by rzarhoun         ###   ########.fr       */
+/*   Updated: 2025/01/05 20:58:06 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,23 @@ void	get_map(char **file, t_map *map, int index)
 
 void	get_file(char *str, char **file)
 {
-	int	i;
-	int	fd;
+	int		i;
+	int		fd;
+	char	*line;
 
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 		return (err("Error\n"));
 	i = 0;
-	file[i] = ft_strtrim(get_next_line(fd), "\n");
+	line = get_next_line(fd);
+	file[i] = ft_strtrim(line, "\n");
+	free(line);
 	while (file[i])
 	{
 		i++;
-		file[i] = ft_strtrim(get_next_line(fd), "\n");
+		line = get_next_line(fd);
+		file[i] = ft_strtrim(line, "\n");
+		free(line);
 	}
 }
 

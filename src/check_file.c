@@ -6,7 +6,7 @@
 /*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:48:16 by rzarhoun          #+#    #+#             */
-/*   Updated: 2025/01/04 21:39:25 by rzarhoun         ###   ########.fr       */
+/*   Updated: 2025/01/05 20:54:31 by rzarhoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	check_order(char **file)
 		|| position->we > position->f || position->we > position->c
 		|| position->ea > position->f || position->ea > position->c
 		||position->f > position->c)
-		return (err("Error\nIdentifiers arent in right order\n"), 1);
-	return (0);
+		return (err("Error\nIdentifiers arent in right order\n"), free(position), 1);
+	return (free(position), 0);
 }
 
 int	check_path(t_mlx *mlx, t_path **path)
