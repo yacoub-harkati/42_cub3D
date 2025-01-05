@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 22:49:08 by root              #+#    #+#             */
-/*   Updated: 2025/01/04 21:49:47 by rzarhoun         ###   ########.fr       */
+/*   Updated: 2025/01/05 22:30:49 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	get_count(t_map *map)
 			if (map->map[i][j] != '1' && map->map[i][j] != '0'
 				&& map->map[i][j] != 'N' && map->map[i][j] != 'S'
 				&& map->map[i][j] != 'W' && map->map[i][j] != 'E'
-				&& map->map[i][j] != ' ' && map->map[i][j] != '\t'
-				&& map->map[i][j] != 'D')
+				&& map->map[i][j] != ' ' && map->map[i][j] != '\t')
 				return (-1);
 			if (map->map[i][j] == 'N' || map->map[i][j] == 'S'
 			|| map->map[i][j] == 'W' || map->map[i][j] == 'E')

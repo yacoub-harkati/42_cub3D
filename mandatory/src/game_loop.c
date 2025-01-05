@@ -6,7 +6,7 @@
 /*   By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 01:49:47 by yaharkat          #+#    #+#             */
-/*   Updated: 2025/01/04 02:44:44 by yaharkat         ###   ########.fr       */
+/*   Updated: 2025/01/05 22:26:51 by yaharkat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,7 @@ int	game_loop(t_mlx *mlx)
 	if (mlx->game->screen->addr)
 		draw_floor_ceiling(mlx);
 	if (mlx->map && mlx->player && mlx->game->running)
-	{
-		update_door_animation(mlx->game->textures->door);
 		cast_rays(mlx);
-		draw_minimap(mlx);
-	}
 	if (mlx->game->ptr && mlx->game->win && mlx->game->screen->img)
 		mlx_put_image_to_window(mlx->game->ptr, mlx->game->win,
 			mlx->game->screen->img, 0, 0);
