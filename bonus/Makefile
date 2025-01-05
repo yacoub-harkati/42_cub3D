@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yaharkat <yaharkat@student.1337.ma>        +#+  +:+       +#+         #
+#    By: rzarhoun <rzarhoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/06 13:45:21 by root              #+#    #+#              #
-#    Updated: 2025/01/05 22:13:37 by yaharkat         ###   ########.fr        #
+#    Updated: 2025/01/05 23:09:17 by rzarhoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,35 +33,35 @@ SRC_DIR = src
 UTILS_DIR = $(SRC_DIR)/utils
 RAYCAST_DIR = $(SRC_DIR)/raycasting
 
-SRCS = $(SRC_DIR)/main.c \
-       $(UTILS_DIR)/check_args.c \
-       $(UTILS_DIR)/error.c \
-       $(UTILS_DIR)/utils1.c \
-       $(UTILS_DIR)/utils2.c \
-       $(UTILS_DIR)/logic.c \
-       $(UTILS_DIR)/raycasting_utils.c \
-       $(SRC_DIR)/init_struct.c \
-       $(SRC_DIR)/door_handler.c \
-       $(SRC_DIR)/parse_data.c \
-       $(SRC_DIR)/check_file.c \
-       $(SRC_DIR)/check_map.c \
-       $(SRC_DIR)/check_walls.c \
-       $(SRC_DIR)/check_utils.c \
-       $(SRC_DIR)/game_loop.c \
-       $(SRC_DIR)/player_move.c \
-       $(SRC_DIR)/mouse_control.c \
-       $(SRC_DIR)/door_utils.c \
-       $(SRC_DIR)/game_init.c \
-       $(SRC_DIR)/game_cleanup.c \
-       $(RAYCAST_DIR)/render.c \
-       $(RAYCAST_DIR)/init_ray.c \
-       $(RAYCAST_DIR)/render_door.c \
-       $(RAYCAST_DIR)/calc.c \
-       $(RAYCAST_DIR)/door_dda.c \
-       $(RAYCAST_DIR)/walls_dda.c \
-       $(RAYCAST_DIR)/cast_rays.c \
-       $(RAYCAST_DIR)/draw_map.c \
-       $(RAYCAST_DIR)/draw_map_utils.c
+SRCS = $(SRC_DIR)/main_bonus.c \
+       $(UTILS_DIR)/check_args_bonus.c \
+       $(UTILS_DIR)/error_bonus.c \
+       $(UTILS_DIR)/utils1_bonus.c \
+       $(UTILS_DIR)/utils2_bonus.c \
+       $(UTILS_DIR)/logic_bonus.c \
+       $(UTILS_DIR)/raycasting_utils_bonus.c \
+       $(SRC_DIR)/init_struct_bonus.c \
+       $(SRC_DIR)/door_handler_bonus.c \
+       $(SRC_DIR)/parse_data_bonus.c \
+       $(SRC_DIR)/check_file_bonus.c \
+       $(SRC_DIR)/check_map_bonus.c \
+       $(SRC_DIR)/check_walls_bonus.c \
+       $(SRC_DIR)/check_utils_bonus.c \
+       $(SRC_DIR)/game_loop_bonus.c \
+       $(SRC_DIR)/player_move_bonus.c \
+       $(SRC_DIR)/mouse_control_bonus.c \
+       $(SRC_DIR)/door_utils_bonus.c \
+       $(SRC_DIR)/game_init_bonus.c \
+       $(SRC_DIR)/game_cleanup_bonus.c \
+       $(RAYCAST_DIR)/render_bonus.c \
+       $(RAYCAST_DIR)/init_ray_bonus.c \
+       $(RAYCAST_DIR)/render_door_bonus.c \
+       $(RAYCAST_DIR)/calc_bonus.c \
+       $(RAYCAST_DIR)/door_dda_bonus.c \
+       $(RAYCAST_DIR)/walls_dda_bonus.c \
+       $(RAYCAST_DIR)/cast_rays_bonus.c \
+       $(RAYCAST_DIR)/draw_map_bonus.c \
+       $(RAYCAST_DIR)/draw_map_utils_bonus.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)
