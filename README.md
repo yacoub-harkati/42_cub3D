@@ -74,6 +74,7 @@ C 225,30,0     # Ceiling color (RGB)
 Map elements:
 - `0`: Empty space
 - `1`: Wall
+- `D`: Door (bonus)
 - `N/S/E/W`: Player starting position and orientation
 - Space: Void (invalid path)
 
@@ -86,7 +87,7 @@ Map elements:
 
 ### Bonus
 - Mouse movement: Camera rotation
-- `E`: Interact with doorsq
+- `E`: Interact with doors
 
 ## Project Structure
 
